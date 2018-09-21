@@ -20,25 +20,14 @@
         "sourceType": "module"
     },
     "rules": {
-        "no-console": "off",
-        "react/jsx-filename-extension": [1, {
-            "extensions": [".js", ".jsx"]
-        }],
-        "react/prefer-stateless-function": "off",
+        "no-console": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]}],
+        "react/prefer-stateless-function": 0,
         "react/jsx-indent": [2, 4],
         "max-len": 0,
-        "indent" : ["error", 4, { "ignoredNodes": ["JSXElement *"] }],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+        "indent" : [2, 4, { "ignoredNodes": ["JSXElement *"] }],
+        "linebreak-style": [2, "unix"],
+        "quotes": [ 2, "single"],
+        "semi": [ 2, "always" ]
     }
 }
