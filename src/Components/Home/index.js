@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Button } from 'antd';
+import { Button, Pagination } from 'antd';
 // import Header from './Header';
 // import Footer from './Footer';
 
@@ -10,6 +10,7 @@ class Home extends PureComponent {
                 <div className="content mt-xl--m">
                     qweqw sdsd sdeqwe
                     <Button type="primary">Primary</Button>
+                    <Pagination defaultCurrent={1} total={50} showSizeChanger />
                 </div>
             </div>
         );
