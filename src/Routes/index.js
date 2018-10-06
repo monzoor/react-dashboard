@@ -16,9 +16,9 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
             </Layout>);
         return (<Route {...rest} render={() => (<NotFoundTemp />)} />);
     }
-    const Main = props => (
+    const Main = () => (
         <Layout>
-            <Component {...props} />
+            <Component />
         </Layout>
     );
     return (<Route {...rest} render={props => (<Main {...props} />)} />);
@@ -33,7 +33,8 @@ AppRoute.propTypes = {
 const Switches = () => (
     <Router>
         <Switch>
-            <AppRoute path="/" exact component={Home} layout={MainLayout} />
+            <AppRoute path="/dashboard" exact component={Home} layout={MainLayout} />
+            <AppRoute path="*" exact layout={MainLayout} component={NotFound} status={404} />
         </Switch>
     </Router>
 );

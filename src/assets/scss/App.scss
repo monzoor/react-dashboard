@@ -1,35 +1,4 @@
-@import "common/test";
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-body {
-    background-color: red;
-    .App {
-        background-color: yellow;
-    }
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+@import "common/01-theme-variables";
+@import "common/mixins";
+@import "common/antd-overwrite";
+@import "common/spacing";
