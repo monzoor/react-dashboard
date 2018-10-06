@@ -1,8 +1,19 @@
 import React from 'react';
+import {
+    Layout,
+} from 'antd';
 
-const Footer = () => (
-    <pre>
-        Footer
-    </pre>);
+const {
+    Footer,
+} = Layout;
 
-export default Footer;
+const year = new Date().getFullYear();
+const footerCopy = `Ant Design © ${year} Created by Monzoor`;
+
+const FooterBar = () => (
+    <Footer style={{ textAlign: 'center' }}>
+        {footerCopy}
+    </Footer>
+);
+
+export default FooterBar;

@@ -2,7 +2,7 @@
 const { injectBabelPlugin } = require('react-app-rewired');
 const { paths } = require('react-app-rewired');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const rewireSass = require('react-app-rewire-scss');
+// const rewireSass = require('react-app-rewire-scss');
 const rewireLess = require('react-app-rewire-less');
 
 module.exports = function override(config, env) {
@@ -10,7 +10,7 @@ module.exports = function override(config, env) {
         ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
         config,
     );
-    config = rewireSass(config, env);
+
     config = rewireLess.withLoaderOptions({
         javascriptEnabled: true,
     })(config, env);

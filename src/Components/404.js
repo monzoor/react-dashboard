@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 
-const FourOFour = (
-    <div className="center-align">
-        <div className="col--full pt-xl--s pb-xl--s">
-            <h1>
-                404
-            </h1>
-            <p>
-                Page not found.
-            </p>
-        </div>
-    </div>
-);
+class NotFound extends PureComponent {
+    render() {
+        return (
+            <div>
+                <div className="content mt-xl--m">
+                    this is home
+                </div>
+            </div>
+        );
+    }
+}
 
-export default FourOFour;
+export default NotFound;

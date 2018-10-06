@@ -1,9 +1,16 @@
-
 import React from 'react';
+import {
+    Layout,
+} from 'antd';
 
-const Header = () => (
-    <pre>
-        Header
-    </pre>);
+const {
+    Header,
+} = Layout;
 
-export default Header;
+const HeadBar = () => (
+    <Header style={{ background: '#fff', padding: 0 }}>
+        this is header
+    </Header>
+);
+
+export default HeadBar;
