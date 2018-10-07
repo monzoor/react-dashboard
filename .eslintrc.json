@@ -20,6 +20,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-nested-ternary": 0,
         "no-console": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]}],
         "react/prefer-stateless-function": 0,
