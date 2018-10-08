@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 
 
 import MainLayout from '../Components/Layout';
-// import AuthLayout from '../Components/Layout/AuthLayout';
+import AuthLayout from '../Components/Layout/AuthLayout';
 import NotFound from '../Components/404';
 import Home from '../Components/Home';
-// import Login from '../Components/Auth';
+import Login from '../Components/Auth';
 
 const fakeAuth = {
     isAuth: false,
@@ -50,7 +50,8 @@ AppRoute.propTypes = {
 const Switches = () => (
     <Router>
         <Switch>
-            <AppRoute path="/dashboard" type="public" exact component={Home} layout={MainLayout} />
+            <AppRoute path="/login" type="public" exact component={Login} layout={AuthLayout} />
+            <AppRoute path="/dashboard" type="private" exact component={Home} layout={MainLayout} />
             <AppRoute path="/private" type="private" exact component={Home} layout={MainLayout} />
             <AppRoute path="*" exact component={NotFound} layout={MainLayout} status={404} />
         </Switch>
