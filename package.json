@@ -36,6 +36,7 @@
     "test": "react-app-rewired test --env=jsdom"
   },
   "devDependencies": {
+    "bootstrap": "^4.1.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",

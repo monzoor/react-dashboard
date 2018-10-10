@@ -38,7 +38,7 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
             </Layout>);
     }
 
-    return (<Route {...rest} render={props => ((rest.type === 'private') ? ((fakeAuth.isAuth === true) ? <LayoutToRender {...props} /> : <Redirect to="/login" />) : <LayoutToRender {...props} />)} />);
+    return (<Route {...rest} render={props => ((rest.type === 'private') ? ((fakeAuth.isAuth === true) ? <LayoutToRender {...props} /> : <Redirect to="/" />) : <LayoutToRender {...props} />)} />);
 };
 
 AppRoute.propTypes = {
@@ -50,7 +50,7 @@ AppRoute.propTypes = {
 const Switches = () => (
     <Router>
         <Switch>
-            <AppRoute path="/login" type="public" exact component={Login} layout={AuthLayout} />
+            <AppRoute path="/" type="public" exact component={Login} layout={AuthLayout} />
             <AppRoute path="/dashboard" type="private" exact component={Home} layout={MainLayout} />
             <AppRoute path="/private" type="private" exact component={Home} layout={MainLayout} />
             <AppRoute path="*" exact component={NotFound} layout={MainLayout} status={404} />
