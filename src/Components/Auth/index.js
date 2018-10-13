@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+
 
 import {
     Form, Icon, Input,
@@ -8,6 +10,7 @@ import {
     Checkbox,
 } from 'antd';
 
+import auth from '../../Actions/authAction';
 
 const FormItem = Form.Item;
 
@@ -22,6 +25,8 @@ class Login extends Component {
         form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                const { dispatch } = this.props;
+                dispatch(auth());
             }
         });
     }
@@ -35,13 +40,13 @@ class Login extends Component {
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <FormItem>
                         {
-                            getFieldDecorator('userName', {
+                            getFieldDecorator('email', {
                                 rules: [{
                                     required: true,
-                                    message: 'Please input your username!',
+                                    type: 'email',
                                 }],
                         })(
-                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />,
+                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
                         )}
                     </FormItem>
                     <FormItem>
@@ -49,7 +54,7 @@ class Login extends Component {
                             getFieldDecorator('password', {
                                 rules: [{
                                     required: true,
-                                    message: 'Please input your Password!',
+                                    len: 3,
                                 }],
                         })(
                             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />,
@@ -78,8 +83,11 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    ad: state.ad.payload,
+});
 
 const WrappedNormalLoginForm = Form.create()(Login);
 
-
-export default WrappedNormalLoginForm;
+export default withRouter(connect(mapStateToProps)(WrappedNormalLoginForm));
+// export default WrappedNormalLoginForm;

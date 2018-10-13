@@ -23,6 +23,12 @@
       "password": "mon22",
       "email": "mon@dd.com",
       "id": 4
+    },
+    {
+      "name": "Fred",
+      "email": "Flintstone",
+      "password": "Flintstone",
+      "id": 5
     }
   ],
   "products": [
