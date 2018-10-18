@@ -16,6 +16,12 @@ const {
 
 
 class MainLayout extends Component {
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log(nextProps, this.props, nextState);
+    //     return false;
+    //     // return !equals(nextProps, this.props); // equals() is your implementation
+    // }
+
     render() {
         const { children } = this.props;
         return (

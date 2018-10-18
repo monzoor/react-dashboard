@@ -8,9 +8,10 @@ import {
     Form, Icon, Input,
     Button,
     Checkbox,
+    message,
 } from 'antd';
 
-import auth from '../../Actions/authAction';
+import authAction from '../../Actions/authAction';
 
 const FormItem = Form.Item;
 
@@ -19,14 +20,20 @@ class Login extends Component {
         form: PropTypes.oneOfType([PropTypes.object]).isRequired,
     };
 
+    // state = {
+    //     loading: false,
+    // }
+
     handleSubmit = (e) => {
         e.preventDefault();
         const { form } = this.props;
         form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
                 const { dispatch } = this.props;
-                dispatch(auth());
+                message.loading('Login in progress..', 0);
+                dispatch(authAction(this.props, values));
+                // message.success('This is a message of success');
             }
         });
     }
@@ -54,7 +61,7 @@ class Login extends Component {
                             getFieldDecorator('password', {
                                 rules: [{
                                     required: true,
-                                    len: 3,
+                                    min: 3,
                                 }],
                         })(
                             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />,
@@ -83,11 +90,17 @@ class Login extends Component {
     }
 }
 
+// const mapStateToProps = (state) => {
+//     console.log(state);
+//     return {
+//         auth: state.auth,
+//     };
+// };
 const mapStateToProps = state => ({
-    ad: state.ad.payload,
+    auth: state.auth,
 });
 
-const WrappedNormalLoginForm = Form.create()(Login);
+const LoginForm = Form.create()(Login);
 
-export default withRouter(connect(mapStateToProps)(WrappedNormalLoginForm));
+export default withRouter(connect(mapStateToProps)(LoginForm));
 // export default WrappedNormalLoginForm;

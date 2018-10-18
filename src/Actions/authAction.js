@@ -1,24 +1,31 @@
 import axios from 'axios';
-import { GET_AD } from './types';
+import jwt from 'jsonwebtoken';
+import { setAuthToken } from '../Utils/setAuthToken';
+
+import { SET_USER } from './_constant';
 // import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
 
 
-export default function auth() {
+export default function auth(props, data) {
+    // console.log('======', data);
     return (dispatch) => {
         dispatch({
             type: 'CLEAR_ERROR_MESSAGES',
         });
-        return axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
-            name: 'Fred',
-            email: 'Flintstone',
-            password: 'Flintstone',
-        })
+        return axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data)
             .then((response) => {
-                console.log(response);
+                // console.log(response.data.accessToken);
+                const token = response.data.accessToken;
+                localStorage.setItem('token', token);
+                setAuthToken(token);
+                console.log('--------------', jwt.decode(token));
+                console.log('------;;--------', props);
+                const users = jwt.decode(token);
                 dispatch({
-                    type: GET_AD,
-                    payload: response,
+                    type: SET_USER,
+                    users,
                 });
+                props.history.push('/');
             })
             .catch((error) => {
                 console.log(error);

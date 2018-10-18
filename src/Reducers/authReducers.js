@@ -1,15 +1,16 @@
-import { GET_AD } from './types';
+import { SET_USER } from './types';
 
 const initialState = {
-    payload: [],
+    isAuthenticated: false,
+    users: [],
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-    case GET_AD: {
+    case SET_USER: {
         return {
-            ...state,
-            payload: action.payload,
+            isAuthenticated: !!(action.users),
+            users: action.users,
         };
     }
 

@@ -1,6 +1,8 @@
 const fs = require('fs');
 const jsonServer = require('json-server');
+const pause = require('connect-pause');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 // const axios = require('axios');
 
 const middlewares = jsonServer.defaults();
@@ -8,8 +10,6 @@ const middlewares = jsonServer.defaults();
 const server = jsonServer.create();
 const router = jsonServer.router('./fake-api/database.json');
 
-// server.use(bodyParser.urlencoded({ extended: true }));
-// server.use(bodyParser.json());
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
@@ -29,21 +29,28 @@ function verifyToken(token) {
 }
 
 // Check if the user exists in database
-function isAuthenticated({ email, password }) {
+function isAuthenticated({ email, password }, getIndex) {
     const userdb = JSON.parse(fs.readFileSync('./fake-api/database.json', 'UTF-8'));
-    return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1;
+    const index = userdb.users.findIndex(user => user.email === email && user.password === password);
+    if (getIndex) {
+        return {
+            name: userdb.users[index].name,
+            email: userdb.users[index].email,
+        };
+    }
+    return index !== -1;
 }
-
+server.use(pause(process.env.SERVER_DELAY));
 server.post('/auth/login', (req, res) => {
     const { email, password } = req.body;
-
-    if (isAuthenticated({ email, password }) === false) {
+    if (!isAuthenticated({ email, password })) {
         const status = 401;
         const message = 'Incorrect email or password';
         res.status(status).json({ status, message });
         return;
     }
-    const accessToken = createToken({ email, password });
+
+    const accessToken = createToken(isAuthenticated({ email, password }, true));
     res.status(200).json({ accessToken });
 });
 

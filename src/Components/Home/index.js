@@ -1,6 +1,17 @@
 import React, { PureComponent } from 'react';
+import { message } from 'antd';
 
+const success = () => {
+    message.destroy();
+    // Dismiss manually and asynchronously
+    // setTimeout(hide, 2500);
+};
 class Home extends PureComponent {
+    constructor(props) {
+        super(props);
+        success();
+    }
+
     render() {
         return (
             <div>
