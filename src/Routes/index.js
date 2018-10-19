@@ -17,7 +17,7 @@ import { isAuth } from '../Utils/setAuthToken';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
     const status = Object.values({ ...rest.location.state })[0];
-    console.log('+++++', rest.type);
+    // console.log('+++++', rest.type);
     const hasAuthenticated = isAuth();
 
     // if (!isAuth && rest.computedMatch.path !== '/login') {

@@ -1,40 +1,28 @@
-import {
-    NO_AD_FOUND,
-    CLEAR_ERROR_MESSAGES,
-    SERVER_ERROR,
-    COMPONENT_ERROR
-} from './types';
+import { NOT_FOUND_ERROR, SERVER_ERROR } from './_constant';
 
 const initialState = {
-    payload: [],
-}
+    errorInfos: [],
+};
 
 
 export default function (state = initialState, action) {
     // console.log('-----error reducer', action);
     switch (action.type) {
+    case NOT_FOUND_ERROR: {
+        return {
+            ...state,
+            errorInfos: action.errorInfos,
+        };
+    }
 
-        case NO_AD_FOUND: {
-            return {
-                ...state,
-                payload: action.errorInfo
-            }
-        }
-        case SERVER_ERROR: {
-            return {
-                ...state,
-                payload: action.errorInfo
-            }
-        }
-        case COMPONENT_ERROR: {
-            return {
-                ...state,
-                payload: action.errorInfo
-            }
-        }
+    case SERVER_ERROR: {
+        return {
+            ...state,
+            errorInfos: action.errorInfos,
+        };
+    }
 
-        default :
-            return initialState;
-
+    default:
+        return initialState;
     }
 }

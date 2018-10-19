@@ -1,34 +1,32 @@
-// import { NO_AD_FOUND } from './types';
+import { NOT_FOUND_ERROR, SERVER_ERROR } from './_constant';
 
-const dispatcher = (dispatch, type, response) => {
-    console.log(response);
-    dispatch({
-        type: type,
-        errorInfo: {
-            status: response.status || null,
-            messages: response.statusText || null,
-            hasErros: true,
-            componentError: response.componentError || null
-        }
-    });
-}
+const errorInfoGenerator = (response) => {
+    // console.log('info gen', response);
+    const errorInfo = {
+        status: response.status || null,
+        messages: response.message || null,
+        hasErrors: true,
+        componentError: response.componentError || null,
+    };
+    return errorInfo;
+};
 const ErrorDispatch = (dispatch, type, response) => {
-    console.log('--mytype', response);
+    const errorInfos = errorInfoGenerator(response);
+    // console.log('--mytype', type, errorInfos);
     switch (type) {
-        case 'NO_AD_FOUND': {
-            console.log('-----NO_AD_FOUND');
-            return dispatcher(dispatch, type, response);
-        }
-
-        case 'SERVER_ERROR': {
-            console.log('-----SERVER_ERROR');
-            return dispatcher(dispatch, type, response);
-        }
-
-        default:
-            console.log('-----Others');
-            return dispatcher(dispatch, type, response);
+    case NOT_FOUND_ERROR: {
+        console.log('-----Errors');
+        return dispatch({ type, errorInfos });
     }
 
+    case SERVER_ERROR: {
+        console.log('-----SERVER_ERROR');
+        return dispatch({ type, errorInfos });
+    }
+
+    default:
+        console.log('-----Others');
+        return dispatch({ type, errorInfos });
+    }
 };
 export default ErrorDispatch;

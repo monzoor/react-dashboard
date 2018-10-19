@@ -20,25 +20,38 @@ class Login extends Component {
         form: PropTypes.oneOfType([PropTypes.object]).isRequired,
     };
 
-    // state = {
-    //     loading: false,
-    // }
+    state = {
+        loading: false,
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { errors } = this.props;
+        if (nextProps.errors !== errors) {
+            if (nextProps.errors.errorInfos.hasErrors) {
+                this.setState({
+                    loading: false,
+                });
+            }
+            message.error(nextProps.errors.errorInfos.messages);
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
         const { form } = this.props;
         form.validateFields((err, values) => {
             if (!err) {
-                // console.log('Received values of form: ', values);
                 const { dispatch } = this.props;
-                message.loading('Login in progress..', 0);
+                this.setState({
+                    loading: true,
+                });
                 dispatch(authAction(this.props, values));
-                // message.success('This is a message of success');
             }
         });
     }
 
     render() {
+        const { loading } = this.state;
         const { form } = this.props;
         const { getFieldDecorator } = form;
 
@@ -76,7 +89,7 @@ class Login extends Component {
                             <Checkbox>Remember me</Checkbox>,
                         )}
                         <Link className="login-form-forgot" to="/">Forgot password</Link>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
                             Log in
                         </Button>
                         Or
@@ -91,13 +104,13 @@ class Login extends Component {
 }
 
 // const mapStateToProps = (state) => {
-//     console.log(state);
+//     const { errors } = state;
 //     return {
-//         auth: state.auth,
+//         errors,
 //     };
 // };
 const mapStateToProps = state => ({
-    auth: state.auth,
+    errors: state.errors,
 });
 
 const LoginForm = Form.create()(Login);
