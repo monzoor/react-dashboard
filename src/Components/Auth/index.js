@@ -59,52 +59,50 @@ class Login extends Component {
         const { getFieldDecorator } = form;
 
         return (
-            <div id="components-form-demo-normal-login">
-                <Form onSubmit={this.handleSubmit} className="login-form">
-                    <FormItem>
-                        {
-                            getFieldDecorator('email', {
-                                rules: [{
-                                    required: true,
-                                    type: 'email',
-                                }],
-                        })(
-                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {
-                            getFieldDecorator('password', {
-                                rules: [{
-                                    required: true,
-                                    min: 3,
-                                }],
-                        })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />,
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {
-                            getFieldDecorator('remember', {
-                                valuePropName: 'checked',
-                                initialValue: true,
-                        })(
-                            <Checkbox>Remember me</Checkbox>,
-                        )}
-                        <Link className="login-form-forgot" to="/">Forgot password</Link>
-                        <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-                            Log in
-                        </Button>
-                        <ErrorBoundary>
-                            <ErrorThrower {...errors} errorMessage="Crushed in login" />
-                        </ErrorBoundary>
-                        Or
-                        <Link to="/">
-                           register now!
-                        </Link>
-                    </FormItem>
-                </Form>
-            </div>
+            <Form onSubmit={this.handleSubmit} id="logIn">
+                <h1 className="text-center font-weight-light">Login</h1>
+                <FormItem>
+                    {
+                        getFieldDecorator('email', {
+                            rules: [{
+                                required: true,
+                                type: 'email',
+                            }],
+                    })(
+                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
+                    )}
+                </FormItem>
+                <FormItem>
+                    {
+                        getFieldDecorator('password', {
+                            rules: [{
+                                required: true,
+                                min: 3,
+                            }],
+                    })(
+                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />,
+                    )}
+                </FormItem>
+                <FormItem>
+                    {
+                        getFieldDecorator('remember', {
+                            valuePropName: 'checked',
+                            initialValue: true,
+                    })(
+                        <Checkbox>Remember me</Checkbox>,
+                    )}
+                    <Link className="float-right" to="/">Forgot password</Link>
+                    <Button type="primary" htmlType="submit" loading={loading} block>
+                        Log in
+                    </Button>
+                    <ErrorBoundary>
+                        <ErrorThrower {...errors} errorMessage="Crushed in login" />
+                    </ErrorBoundary>
+                    <Button className="btn-outline-primary mt-3" href="/signup" block>
+                        Signup
+                    </Button>
+                </FormItem>
+            </Form>
         );
     }
 }

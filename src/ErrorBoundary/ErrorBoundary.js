@@ -38,12 +38,10 @@ class ErrorBoundary extends Component {
     }
 
     render() {
-        // console.log('land in error', this.state);
         const {
             hasError, status, messages, componentError,
         } = this.state;
         const { match, children } = this.props;
-        // console.log('------', messages);
         if (hasError) {
             if (!componentError) {
                 switch (status) {
@@ -54,11 +52,11 @@ class ErrorBoundary extends Component {
                     return <Redirect push to={{ pathname: match.url, state: { status: 500 } }} />;
                 }
                 default:
-                    console.log(')))))))))');
+                    // console.log(')))))))))');
                 }
             }
             return (
-                <div className="alert alert-danger">
+                <div className="alert alert-danger py-0">
                     {messages}
                 </div>
             );
