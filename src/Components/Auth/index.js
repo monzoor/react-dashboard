@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-
-
 import {
     Form, Icon, Input,
     Button,
@@ -11,6 +9,8 @@ import {
     message,
 } from 'antd';
 
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
+import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
 import authAction from '../../Actions/authAction';
 
 const FormItem = Form.Item;
@@ -24,6 +24,7 @@ class Login extends Component {
         loading: false,
     }
 
+
     componentWillReceiveProps(nextProps) {
         const { errors } = this.props;
         if (nextProps.errors !== errors) {
@@ -31,17 +32,19 @@ class Login extends Component {
                 this.setState({
                     loading: false,
                 });
+                message.destroy();
             }
-            message.error(nextProps.errors.errorInfos.messages);
+            if (nextProps.errors.errorInfos.messages && nextProps.errors.errorInfos.componentError) {
+                message.error(nextProps.errors.errorInfos.messages);
+            }
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { form } = this.props;
+        const { form, dispatch } = this.props;
         form.validateFields((err, values) => {
             if (!err) {
-                const { dispatch } = this.props;
                 this.setState({
                     loading: true,
                 });
@@ -52,7 +55,7 @@ class Login extends Component {
 
     render() {
         const { loading } = this.state;
-        const { form } = this.props;
+        const { form, errors } = this.props;
         const { getFieldDecorator } = form;
 
         return (
@@ -92,6 +95,9 @@ class Login extends Component {
                         <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
                             Log in
                         </Button>
+                        <ErrorBoundary>
+                            <ErrorThrower {...errors} errorMessage="Crushed in login" />
+                        </ErrorBoundary>
                         Or
                         <Link to="/">
                            register now!

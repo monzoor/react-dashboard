@@ -1,74 +1,75 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import NotFound from '../404';
+// import NotFound from '../Components/404';
 
-const test = () => (
-    <h1>asdasd</h1>
-)
+// const test = () => (
+//     <h1>asdasd</h1>
+// )
 class ErrorBoundary extends Component {
-
-    constructor (props) {
-        super(props);
-        this.state = {
-            hasError: false,
-            error: null,
-            errorInfo: null,
-        }
-    }
     static propTypes = {
-    children: PropTypes.oneOfType([
-          PropTypes.node,
-          PropTypes.arrayOf(PropTypes.node)
+        children: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.arrayOf(PropTypes.node),
         ]).isRequired,
         // render: PropTypes.func.isRequired
     };
 
-    componentDidCatch(error, errorInfo) {
-        console.log('errrr---catch', error);
-        this.setState({
-            hasError: (error.componetError)? false : true,
-            error,
-            errorInfo,
-            componentError: error.componetError || null
-        })
+    state = {
+        hasError: false,
+        status: null,
+        messages: null,
+        componentError: null,
     }
-    render () {
 
 
-        if (this.state.hasError) {
-            switch(this.state.error.status) {
+    // componentDidCatch(error, errorInfo) {
+    componentDidCatch() {
+        // console.log('errrr---catch', this.props);
+        const { errors } = this.props;
+        const { status, messages, componentError } = errors.errorInfos;
+        this.setState({
+            hasError: true,
+            status,
+            messages,
+            componentError: componentError || null,
+        });
+    }
+
+    render() {
+        // console.log('land in error', this.state);
+        const {
+            hasError, status, messages, componentError,
+        } = this.state;
+        const { match, children } = this.props;
+        // console.log('------', messages);
+        if (hasError) {
+            if (!componentError) {
+                switch (status) {
                 case 404: {
-                    return <Redirect push to={{ pathname: this.props.match.url, state: { status: 404 }}}/>
+                    return <Redirect push to={{ pathname: match.url, state: { status: 404 } }} />;
                 }
                 case 500: {
-                    return <Redirect push to={{ pathname: this.props.match.url, state: { status: 500 }}}/>
+                    return <Redirect push to={{ pathname: match.url, state: { status: 500 } }} />;
                 }
                 default:
-
-                    return <Redirect push to={{ pathname: this.props.match.url, state: { status: null }}}/>
-
-                    // return <NotFound></NotFound>
-                    // return this.props.render(this.state.error, this.state.errorInfo);
-                    // return (
-                    //     <h2>Something went wrong.</h2>
-                    // );
+                    console.log(')))))))))');
+                }
             }
-            //
-            // return <Redirect push to={{ pathname: this.props.match.url, state: { status: 404 }}}/>
-            // return <NotFound></NotFound>
+            return (
+                <div className="alert alert-danger">
+                    {messages}
+                </div>
+            );
         }
 
-        return this.props.children;
+        return children;
     }
 }
-const mapStateToProps = (state, ownProps) => {
-    // console.log('===boundary===', state.errors);
-    return {
-        errors: state.errors.payload
-    };
-};
+const mapStateToProps = state => ({
+    errors: state.errors,
+});
 
-
-
-export default withRouter(ErrorBoundary)
+export default withRouter(connect(mapStateToProps)(ErrorBoundary));
+// export default withRouter(ErrorBoundary);

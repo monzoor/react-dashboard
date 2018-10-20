@@ -2,14 +2,14 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import { setAuthToken } from '../Utils/setAuthToken';
 
-import { SET_USER } from './_constant';
+import { SET_USER, CLEAR_ERROR_MESSAGES } from './_constant';
 import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
 
 
 export default function auth(props, data) {
     return (dispatch) => {
         dispatch({
-            type: 'CLEAR_ERROR_MESSAGES',
+            type: CLEAR_ERROR_MESSAGES,
         });
         return axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data)
             .then((response) => {
@@ -24,15 +24,16 @@ export default function auth(props, data) {
                 props.history.push('/');
             })
             .catch((error) => {
-                console.log('status', error.response);
                 const errorStatus = error.response;
                 if (!errorStatus) {
                     const serverError = {
                         status: 500,
                         message: 'Something went wrong. Please try again later.',
+                        componentError: true,
                     };
                     ErrorDispatch(dispatch, 'SERVER_ERROR', serverError);
                 } else {
+                    // errorStatus.data.componentError = true;
                     ErrorDispatch(dispatch, 'NOT_FOUND_ERROR', errorStatus.data);
                 }
             });
