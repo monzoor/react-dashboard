@@ -1,4 +1,6 @@
-import { NOT_FOUND_ERROR, SERVER_ERROR, CLEAR_ERROR_MESSAGES } from './_constant';
+import {
+    NOT_FOUND_ERROR, SERVER_ERROR, CLEAR_ERROR_MESSAGES, ITEM_EXISTS,
+} from './_constant';
 
 const errorInfoGenerator = (response) => {
     // console.log('info gen', response);
@@ -23,6 +25,11 @@ const ErrorDispatch = (dispatch, type, response) => {
     }
     case NOT_FOUND_ERROR: {
         console.log('-----Not found Errors');
+        return dispatch({ type, errorInfos });
+    }
+
+    case ITEM_EXISTS: {
+        console.log('-----USER_EXISTS');
         return dispatch({ type, errorInfos });
     }
 

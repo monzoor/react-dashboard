@@ -5,13 +5,12 @@ import { Link, withRouter } from 'react-router-dom';
 import {
     Form, Icon, Input,
     Button,
-    Checkbox,
     message,
 } from 'antd';
 
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
-import { auth } from '../../Actions/authAction';
+import { signup } from '../../Actions/authAction';
 
 const FormItem = Form.Item;
 
@@ -48,7 +47,7 @@ class Login extends Component {
                 this.setState({
                     loading: true,
                 });
-                dispatch(auth(this.props, values));
+                dispatch(signup(this.props, values));
             }
         });
     }
@@ -60,7 +59,17 @@ class Login extends Component {
 
         return (
             <Form onSubmit={this.handleSubmit} id="logIn">
-                <h1 className="text-center font-weight-light">Login</h1>
+                <h1 className="text-center font-weight-light">Sign Up</h1>
+                <FormItem>
+                    {
+                        getFieldDecorator('name', {
+                            rules: [{
+                                required: true,
+                            }],
+                    })(
+                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Name" />,
+                    )}
+                </FormItem>
                 <FormItem>
                     {
                         getFieldDecorator('email', {
@@ -69,7 +78,7 @@ class Login extends Component {
                                 type: 'email',
                             }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
+                        <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
                     )}
                 </FormItem>
                 <FormItem>
@@ -84,22 +93,14 @@ class Login extends Component {
                     )}
                 </FormItem>
                 <FormItem>
-                    {
-                        getFieldDecorator('remember', {
-                            valuePropName: 'checked',
-                            initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>,
-                    )}
-                    <Link className="float-right" to="/">Forgot password</Link>
                     <Button type="primary" htmlType="submit" loading={loading} block>
-                        Log in
+                        Sign Up
                     </Button>
                     <ErrorBoundary>
-                        <ErrorThrower {...errors} errorMessage="Crushed in login" />
+                        <ErrorThrower {...errors} errorMessage="Crushed in sign up" />
                     </ErrorBoundary>
-                    <Link to="/signup" className="btn btn-block btn-outline-primary mt-3">
-                        Signup
+                    <Link to="/login">
+                        Back to login
                     </Link>
                 </FormItem>
             </Form>

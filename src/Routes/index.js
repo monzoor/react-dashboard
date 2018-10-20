@@ -12,6 +12,7 @@ import NotFound from '../Components/404';
 import Home from '../Components/Home';
 import Private from '../Components/Home/test';
 import Login from '../Components/Auth';
+import SignUp from '../Components/Auth/SignUp';
 import { isAuth } from '../Utils/setAuthToken';
 
 
@@ -62,9 +63,6 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
             )}
         />
     );
-
-    // return (<Route {...rest} render={props => (<LayoutToRender {...props} />)} />);
-    // return (<Route {...rest} render={props => ((rest.type === 'private') ? ((isAuth) ? <LayoutToRender {...props} /> : <Redirect to="/login" />) : <LayoutToRender {...props} />)} />);
 };
 
 AppRoute.propTypes = {
@@ -72,12 +70,12 @@ AppRoute.propTypes = {
     layout: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
 };
 
-
 const Switches = () => (
     <Router>
         <div>
             <Switch>
                 <AppRoute path="/login" type="public" exact component={Login} layout={AuthLayout} />
+                <AppRoute path="/signup" type="public" exact component={SignUp} layout={AuthLayout} />
                 <AppRoute path="/" type="private" exact component={Home} layout={MainLayout} />
                 <AppRoute path="/private" type="private" exact component={Private} layout={MainLayout} />
                 <AppRoute path="*" exact component={NotFound} layout={MainLayout} status={404} />
@@ -85,30 +83,5 @@ const Switches = () => (
         </div>
     </Router>
 );
+
 export default Switches;
-
-// <Router>
-//     {(!isAuth)
-//         ? (
-//             <Switch>
-//                 <AppRoute path="/login" exact component={Login} layout={AuthLayout} />
-//                 <Redirect to="/login" />
-//             </Switch>
-//         )
-//         : (
-//             <Switch>
-//                 <AppRoute path="/" exact component={Home} layout={MainLayout} />
-//                 <AppRoute path="/private" exact component={Home} layout={MainLayout} />
-//                 <AppRoute path="*" exact component={NotFound} layout={MainLayout} status={404} />
-//             </Switch>
-//         )
-//     }
-//
-// </Router>
-// <Switch>
-//     <AppRoute path="*" exact component={NotFound} layout={MainLayout} status={404} />
-// </Switch>
-
-// const status = Object.values({ ...rest.location.state })[0] || null;
-// <AppRoute path="/ads/:adSlug=:uid" exact layout={MainLayout} component={AdDetails} />
-// <AppRoute path="*" exact layout={MainLayout} component={NotFound} status={404} />

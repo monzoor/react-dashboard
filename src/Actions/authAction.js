@@ -6,7 +6,7 @@ import { SET_USER, CLEAR_ERROR_MESSAGES } from './_constant';
 import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
 
 
-export default function auth(props, data) {
+export function auth(props, data) {
     return (dispatch) => {
         dispatch({
             type: CLEAR_ERROR_MESSAGES,
@@ -35,6 +35,36 @@ export default function auth(props, data) {
                 } else {
                     // errorStatus.data.componentError = true;
                     ErrorDispatch(dispatch, 'NOT_FOUND_ERROR', errorStatus.data);
+                }
+            });
+    };
+}
+
+export function signup(props, formData) {
+    return (dispatch) => {
+        dispatch({
+            type: CLEAR_ERROR_MESSAGES,
+        });
+        return axios.post(`${process.env.REACT_APP_API_URL}/users`, formData)
+            .then((response) => {
+                const newFormData = {
+                    email: response.data.email,
+                    password: response.data.password,
+                };
+                dispatch(auth(props, newFormData));
+            })
+            .catch((error) => {
+                const errorStatus = error.response;
+                if (!errorStatus) {
+                    const serverError = {
+                        status: 500,
+                        message: 'Something went wrong. Please try again later.',
+                        componentError: true,
+                    };
+                    ErrorDispatch(dispatch, 'SERVER_ERROR', serverError);
+                } else {
+                    // errorStatus.data.componentError = true;
+                    ErrorDispatch(dispatch, 'ITEM_EXISTS', errorStatus.data);
                 }
             });
     };
