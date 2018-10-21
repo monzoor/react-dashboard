@@ -9,7 +9,7 @@ const {
 
 const HeadBar = () => (
     <Header style={{ background: '#fff', padding: 0 }}>
-        this is header
+        <p>this is header</p>
     </Header>
 );
 

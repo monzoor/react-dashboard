@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link, withRouter } from 'react-router-dom';
 import {
     Layout,
     Menu,
@@ -25,20 +25,23 @@ class Sidebar extends Component {
     }
 
     render() {
+        const { location } = this.props;
         const { collapsed } = this.state;
         return (
             <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
                 <div className="logo">
                     <h1>asdasd</h1>
                 </div>
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                    <Menu.Item key="1">
+                <Menu theme="dark" selectedKeys={[location.pathname]} mode="inline">
+                    <Menu.Item key="/">
                         <Icon type="pie-chart" />
-                        <span>Option 1</span>
+                        <span>Home</span>
+                        <Link to="/" />
                     </Menu.Item>
-                    <Menu.Item key="2">
+                    <Menu.Item key="/private">
                         <Icon type="desktop" />
-                        <span>Option 2</span>
+                        <span>Private</span>
+                        <Link to="/private" />
                     </Menu.Item>
                     <SubMenu
                       key="sub1"
@@ -58,4 +61,4 @@ class Sidebar extends Component {
     }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);
