@@ -1,6 +1,7 @@
+@import "common/01-theme-variables";
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
+@import "common/ant-overwrite";
 @import "common/utils";
-// @import "common/mixins";
-// @import "common/antd-overwrite";
-// @import "common/spacing";
+
+@import "pages/home";
