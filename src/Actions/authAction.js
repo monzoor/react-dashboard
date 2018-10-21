@@ -47,11 +47,13 @@ export function signup(props, formData) {
         });
         return axios.post(`${process.env.REACT_APP_API_URL}/users`, formData)
             .then((response) => {
-                const newFormData = {
-                    email: response.data.email,
-                    password: response.data.password,
-                };
-                dispatch(auth(props, newFormData));
+                if (response.data) {
+                    const newFormData = {
+                        email: formData.email,
+                        password: formData.password,
+                    };
+                    dispatch(auth(props, newFormData));
+                }
             })
             .catch((error) => {
                 const errorStatus = error.response;

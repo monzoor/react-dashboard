@@ -2,6 +2,7 @@ const fs = require('fs');
 const jsonServer = require('json-server');
 const pause = require('connect-pause');
 const jwt = require('jsonwebtoken');
+const passwordHash = require('password-hash');
 require('dotenv').config();
 // const axios = require('axios');
 
@@ -29,16 +30,25 @@ function verifyToken(token) {
 }
 
 // Check if the user exists in database
-function isAuthenticated({ email, password }, getIndex) {
+function isAuthenticated({ email, password }, getIndex, newUser) {
     const userdb = JSON.parse(fs.readFileSync('./fake-api/database.json', 'UTF-8'));
-    const index = userdb.users.findIndex(user => user.email === email && user.password === password);
-    if (getIndex) {
-        return {
-            name: userdb.users[index].name,
-            email: userdb.users[index].email,
-        };
+    const index = userdb.users.findIndex(user => user.email === email);
+
+    if (newUser && index !== -1) {
+        return true;
     }
-    return index !== -1;
+
+    if (index !== -1 && passwordHash.verify(password, userdb.users[index].password)) {
+        if (getIndex) {
+            return {
+                name: userdb.users[index].name,
+                email: userdb.users[index].email,
+            };
+        }
+        return true;
+    }
+    console.log('00000');
+    return false;
 }
 server.use(pause(process.env.SERVER_DELAY));
 server.post('/auth/login', (req, res) => {
@@ -55,9 +65,11 @@ server.post('/auth/login', (req, res) => {
 });
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
+    // let { password } = req.body;
+    req.body.password = passwordHash.generate(req.body.password);
     const { email, password } = req.body;
     const publicRoute = (req.originalUrl === '/users' && req.method === 'POST');
-    if (publicRoute && isAuthenticated({ email, password })) {
+    if (publicRoute && isAuthenticated({ email, password }, false, true)) {
         const status = 409;
         const message = 'Account already exists';
         res.status(status).json({ status, message });

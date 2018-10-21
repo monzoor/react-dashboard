@@ -1,34 +1,10 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "oka",
-      "email": "bruno@email.com",
-      "password": "bruno"
-    },
-    {
-      "id": 2,
-      "name": "techie",
-      "email": "techie@email.com",
-      "password": "techie"
-    },
-    {
-      "id": 3,
-      "name": "nilson",
-      "email": "nilson@email.com",
-      "password": "nilson"
-    },
-    {
-      "name": "mon",
-      "password": "qwe",
-      "email": "mon@dd.com",
-      "id": 4
-    },
-    {
-      "name": "Fred",
-      "email": "Flintstone",
-      "password": "Flintstone",
-      "id": 5
+      "name": "M M Mahmud",
+      "email": "mmtamal@gmail.com",
+      "password": "sha1$91c09474$1$e580c627935b368e53790a75130a97c857039227",
+      "id": 1
     }
   ],
   "products": [
