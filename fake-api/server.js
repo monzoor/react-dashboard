@@ -63,18 +63,20 @@ server.post('/auth/login', (req, res) => {
     const accessToken = createToken(isAuthenticated({ email, password }, true));
     res.status(200).json({ accessToken });
 });
-
-server.use(/^(?!\/auth).*$/, (req, res, next) => {
-    // let { password } = req.body;
+server.post('/users', (req, res, next) => {
     req.body.password = passwordHash.generate(req.body.password);
     const { email, password } = req.body;
-    const publicRoute = (req.originalUrl === '/users' && req.method === 'POST');
-    if (publicRoute && isAuthenticated({ email, password }, false, true)) {
+    if (isAuthenticated({ email, password }, false, true)) {
         const status = 409;
         const message = 'Account already exists';
         res.status(status).json({ status, message });
         return;
     }
+    next();
+});
+
+server.use(/^(?!\/auth).*$/, (req, res, next) => {
+    const publicRoute = (req.originalUrl === '/users' && req.method === 'POST');
     if (!publicRoute && (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer')) {
         const status = 401;
         const message = 'Error in authorization format';

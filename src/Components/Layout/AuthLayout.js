@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
+import landingImage from '../../assets/images/bg-auth-left.jpg';
+import landingImage2 from '../../assets/images/bg-auth-right.jpg';
+
 
 class MainLayout extends Component {
     render() {
@@ -9,12 +12,10 @@ class MainLayout extends Component {
         return (
             <div className="container-fluid">
                 <div className="row minvh-100">
-                    <div className="col-8 d-none d-lg-block bg-primary">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est consequatur culpa totam aliquid, excepturi ullam asperiores numquam iusto. Ea, asperiores!
-                    </div>
-                    <div className="col-lg-4 col-12 d-flex">
+                    <div className="col-6 d-none d-lg-block landing" style={{ backgroundImage: `url(${landingImage})` }} />
+                    <div className="col-lg-6 col-12 d-flex landing landing-right" style={{ backgroundImage: `url(${landingImage2})` }}>
                         <div className="row align-items-center minvh-100 w-100 mx-0">
-                            <div className="col-12 mx-auto">
+                            <div className="col-lg-8 col-12 mx-auto">
                                 {children}
                             </div>
                         </div>

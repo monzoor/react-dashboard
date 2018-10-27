@@ -5,6 +5,12 @@
       "email": "mmtamal@gmail.com",
       "password": "sha1$91c09474$1$e580c627935b368e53790a75130a97c857039227",
       "id": 1
+    },
+    {
+      "name": "tamal",
+      "password": "sha1$7d79f7f5$1$0f2ab504682ff15cecf6453680fe61f5994769fa",
+      "email": "mon@dd.com",
+      "id": 2
     }
   ],
   "products": [

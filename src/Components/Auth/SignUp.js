@@ -59,18 +59,18 @@ class Login extends Component {
 
         return (
             <Form onSubmit={this.handleSubmit} id="logIn">
-                <h1 className="text-center font-weight-light">Sign Up</h1>
-                <FormItem>
+                <h1 className="text-center font-weight-light mb-4">Sign Up</h1>
+                <FormItem className="form-group">
                     {
                         getFieldDecorator('name', {
                             rules: [{
                                 required: true,
                             }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Name" />,
+                        <Input prefix={<Icon type="user" className="text-muted" />} placeholder="Name" />,
                     )}
                 </FormItem>
-                <FormItem>
+                <FormItem className="form-group">
                     {
                         getFieldDecorator('email', {
                             rules: [{
@@ -78,10 +78,10 @@ class Login extends Component {
                                 type: 'email',
                             }],
                     })(
-                        <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
+                        <Input prefix={<Icon type="mail" className="text-muted" />} placeholder="Email" />,
                     )}
                 </FormItem>
-                <FormItem>
+                <FormItem className="form-group">
                     {
                         getFieldDecorator('password', {
                             rules: [{
@@ -89,11 +89,11 @@ class Login extends Component {
                                 min: 3,
                             }],
                     })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />,
+                        <Input prefix={<Icon type="lock" className="text-muted" />} type="password" placeholder="Password" />,
                     )}
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" htmlType="submit" loading={loading} block>
+                    <Button className="btn btn-primary" htmlType="submit" loading={loading} block>
                         Sign Up
                     </Button>
                     <ErrorBoundary>
