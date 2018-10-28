@@ -26,7 +26,9 @@ function createToken(payload) {
 
 // Verify the token
 function verifyToken(token) {
-    return jwt.verify(token, SECRET_KEY, (err, decode) => (decode !== undefined ? decode : err));
+    const verifyStatus = jwt.verify(token, SECRET_KEY, (err, decode) => (decode !== undefined ? decode : err));
+    if ('message' in verifyStatus) throw verifyStatus;
+    return verifyStatus;
 }
 
 // Check if the user exists in database
@@ -47,7 +49,6 @@ function isAuthenticated({ email, password }, getIndex, newUser) {
         }
         return true;
     }
-    console.log('00000');
     return false;
 }
 server.use(pause(process.env.SERVER_DELAY));
@@ -61,6 +62,12 @@ server.post('/auth/login', (req, res) => {
     }
 
     const accessToken = createToken(isAuthenticated({ email, password }, true));
+    // Token tester
+
+    // invalid token
+    // const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+    // experied token
+    // const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGFtYWwiLCJlbWFpbCI6Im1vbkBkZC5jb20iLCJpYXQiOjE1NDA2NjEyODYsImV4cCI6MTU0MDY2NDg4Nn0.YeiM6jHNnJFF9MeOCjEYFgqpEEnN0GPrCw3YwSPenBo';
     res.status(200).json({ accessToken });
 });
 server.post('/users', (req, res, next) => {

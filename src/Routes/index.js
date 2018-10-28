@@ -13,15 +13,14 @@ import Home from '../Components/Home';
 import Private from '../Components/Home/test';
 import Login from '../Components/Auth';
 import SignUp from '../Components/Auth/SignUp';
-import { isAuth } from '../Utils/setAuthToken';
+import { verifyToken } from '../Utils/setAuthToken';
 
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
     const status = Object.values({ ...rest.location.state })[0];
     // console.log('+++++', rest.type);
-    const hasAuthenticated = isAuth();
+    const hasAuthenticated = verifyToken(localStorage.token);
 
-    // if (!isAuth && rest.computedMatch.path !== '/login') {
     if (!hasAuthenticated && !rest.type) {
         return (<Redirect to="/login" />);
     }

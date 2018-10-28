@@ -1,17 +1,23 @@
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
-export function setAuthToken(token) {
+export function setAuthTokenToHeader(token) {
     if (token) {
-        console.log('token found');
         axios.defaults.headers.common.authorization = `Bearer ${token}`;
         return;
     }
-    console.log('no found');
     delete axios.defaults.headers.common.authorization;
-    // return false;
 }
 
-export function isAuth() {
+export function verifyToken(token) {
     // console.log('has auth?');
-    return !!(localStorage.token);
+    const users = jwt.decode(token);
+    const currentTime = Date.now() / 1000;
+    console.log('0000000', users);
+    if (users && 'name' in users && 'email' in users && 'exp' in users && currentTime < users.exp) {
+        return true;
+    }
+    localStorage.removeItem('token');
+    return false;
+    // return !!(localStorage.token);
 }

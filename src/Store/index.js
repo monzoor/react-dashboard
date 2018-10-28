@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import jwt from 'jsonwebtoken';
-import { setAuthToken, isAuth } from '../Utils/setAuthToken';
+import { setAuthTokenToHeader, verifyToken } from '../Utils/setAuthToken';
 import rootRecucer from '../Rootreducer';
 
 const initialState = {};
@@ -18,8 +18,10 @@ const enhancer = composeEnhancers(
 );
 
 const store = createStore(rootRecucer, initialState, enhancer);
-if (isAuth()) {
-    setAuthToken(localStorage.token);
+
+const goodToken = verifyToken(localStorage.token);
+if (goodToken) {
+    setAuthTokenToHeader(localStorage.token);
     const users = jwt.decode(localStorage.token);
     store.dispatch({
         type: 'SET_USER',

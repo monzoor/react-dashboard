@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { setAuthToken } from '../Utils/setAuthToken';
+import { setAuthTokenToHeader, verifyToken } from '../Utils/setAuthToken';
 
 import { SET_USER, CLEAR_ERROR_MESSAGES } from './_constant';
 import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
@@ -14,8 +14,12 @@ export function auth(props, data) {
         return axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data)
             .then((response) => {
                 const token = response.data.accessToken;
+                const validToken = verifyToken(token);
+                if (!validToken) {
+                    throw new Error('Invalid token');
+                }
                 localStorage.setItem('token', token);
-                setAuthToken(token);
+                setAuthTokenToHeader(token);
                 const users = jwt.decode(token);
                 dispatch({
                     type: SET_USER,
