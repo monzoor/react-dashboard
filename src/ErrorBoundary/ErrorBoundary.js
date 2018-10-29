@@ -56,7 +56,7 @@ class ErrorBoundary extends Component {
                 }
             }
             return (
-                <div className="alert alert-danger py-0">
+                <div className="alert alert-danger py-0 mt-3">
                     {messages}
                 </div>
             );
