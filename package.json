@@ -45,7 +45,8 @@
     "test": "react-app-rewired test --env=jsdom",
     "local": "./node_modules/concurrently/bin/concurrently.js 'yarn fake-api' 'yarn go'",
     "start": "./node_modules/concurrently/bin/concurrently.js 'npm run fake-api' 'serve -s build' ",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "check-all": "CI=true yarn test && yarn build"
   },
   "devDependencies": {
     "bootstrap": "^4.1.3",
@@ -53,8 +54,12 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "pre-commit": "^1.2.2",
     "react-perf-devtool": "^3.1.8"
   },
+  "pre-commit": [
+    "check-all"
+  ],
   "proxy": "http://localhost:5555",
   "browserslist": [
     ">0.2%",

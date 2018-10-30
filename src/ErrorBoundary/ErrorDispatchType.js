@@ -24,22 +24,22 @@ const ErrorDispatch = (dispatch, type, response) => {
         return dispatch({ type, errorInfo });
     }
     case NOT_FOUND_ERROR: {
-        console.log('-----Not found Errors');
+        // console.log('-----Not found Errors');
         return dispatch({ type, errorInfos });
     }
 
     case ITEM_EXISTS: {
-        console.log('-----USER_EXISTS');
+        // console.log('-----USER_EXISTS');
         return dispatch({ type, errorInfos });
     }
 
     case SERVER_ERROR: {
-        console.log('-----SERVER_ERROR');
+        // console.log('-----SERVER_ERROR');
         return dispatch({ type, errorInfos });
     }
 
     default:
-        console.log('-----Others');
+        // console.log('-----Others');
         return dispatch({ type, errorInfos });
     }
 };
