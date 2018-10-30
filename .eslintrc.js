@@ -1,4 +1,5 @@
-{
+console.log(process.env.NODE_ENV)
+module.exports = {
     "env": {
         "browser": true,
         "es6": true,
@@ -22,7 +23,7 @@
     "rules": {
         "react/prop-types": 0,
         "no-nested-ternary": 0,
-        "no-console": 0,
+        "no-console": process.env.NODE_ENV === 'production' ? 2 : 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]}],
         "react/prefer-stateless-function": 0,
         "react/jsx-indent": [2, 4],

@@ -13,7 +13,6 @@ export function verifyToken(token) {
     // console.log('has auth?');
     const users = jwt.decode(token);
     const currentTime = Date.now() / 1000;
-    console.log('0000000', users);
     if (users && 'name' in users && 'email' in users && 'exp' in users && currentTime < users.exp) {
         return true;
     }
