@@ -11,7 +11,7 @@ import AuthLayout from '../Components/Layout/AuthLayout';
 import NotFound from '../Components/404';
 import Home from '../Components/Home';
 import Private from '../Components/Home/private';
-import Login from '../Components/Auth';
+import Login from '../Components/Auth/Login';
 import SignUp from '../Components/Auth/SignUp';
 import { verifyToken } from '../Utils/setAuthToken';
 
