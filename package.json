@@ -51,7 +51,7 @@
     "local": "./node_modules/concurrently/bin/concurrently.js 'yarn fake-api' 'yarn go'",
     "start": "./node_modules/concurrently/bin/concurrently.js 'npm run fake-api' 'serve -s build' ",
     "heroku-postbuild": "npm run build",
-    "check-all": "CI=true yarn test && yarn build"
+    "check-all": "CI=true yarn test"
   },
   "devDependencies": {
     "bootstrap": "^4.1.3",
