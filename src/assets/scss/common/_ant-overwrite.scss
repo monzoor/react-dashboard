@@ -7,3 +7,6 @@
 .ant-input {
     @extend .form-control;
 }
+.ant-form-item-control {
+    line-height: inherit;
+}
