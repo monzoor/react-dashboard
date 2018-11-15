@@ -4,120 +4,16 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import {
     Form,
-    Input,
-    Icon,
     Button,
     message,
-    Checkbox,
 } from 'antd';
 
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
 import { auth } from '../../Actions/authAction';
+import { Email, Password, RememberMe } from './_FormComponent';
 
-const FormItem = Form.Item;
-
-const Email = (props) => {
-    const { form } = props;
-    // const { getFieldProps, getFieldError } = form;
-    const { getFieldProps } = form;
-    // const errors = getFieldError('email');
-    // console.log(form);
-    // setTimeout(() => {
-    //     form.setFields({
-    //         email: {
-    //             value: 'asdasd',
-    //         },
-    //     });
-    // }, 500);
-    return (
-        <div>
-            <FormItem className="form-group">
-                <Input
-                //   className={errors && 'has-error'}
-                  prefix={<Icon type="user" className="text-muted" />}
-                  type="text"
-                  placeholder="Email"
-                  {...getFieldProps('email', {
-                                    rules: [{
-                                        required: true,
-                                        type: 'email',
-                                    },
-                                ],
-                            })
-                        }
-                />
-            </FormItem>
-            <div>
-                {/* {errors ? errors.join(',') : null} */}
-            </div>
-        </div>);
-};
-const Password = (props) => {
-    const { form } = props;
-    // const { getFieldProps, getFieldError } = form;
-    const { getFieldProps } = form;
-    // const errors = getFieldError('email');
-    // console.log(form);
-    // setTimeout(() => {
-    //     form.setFields({
-    //         email: {
-    //             value: 'asdasd',
-    //         },
-    //     });
-    // }, 500);
-    return (
-        <div>
-            <FormItem className="form-group">
-                <Input
-                //   className={errors && 'has-error'}
-                  prefix={<Icon type="lock" className="text-muted" />}
-                  type="password"
-                  placeholder="Password"
-                  {...getFieldProps('password', {
-                                    rules: [{
-                                        required: true,
-                                        min: 3,
-                                    },
-                                ],
-                            })
-                        }
-                />
-            </FormItem>
-            <div>
-                {/* {errors ? errors.join(',') : null} */}
-            </div>
-        </div>);
-};
-const RememberMe = () => {
-    console.log('dada');
-    // function onChange(e) {
-    //     console.log(`checked = ${e.target.checked}`);
-    // }
-    // const { form } = props;
-    // const { getFieldProps, getFieldError } = form;
-    // const { getFieldProps } = form;
-    // const errors = getFieldError('email');
-    // console.log(form);
-    // setTimeout(() => {
-    //     form.setFields({
-    //         email: {
-    //             value: 'asdasd',
-    //         },
-    //     });
-    // }, 500);
-    return (
-        <div>
-            <FormItem className="form-group">
-                <Checkbox>Remember me</Checkbox>
-            </FormItem>
-            <div>
-                {/* {errors ? errors.join(',') : null} */}
-            </div>
-        </div>);
-};
-
-class Login extends Component {
+export class Login extends Component {
     static propTypes = {
         form: PropTypes.oneOfType([PropTypes.object]).isRequired,
     };
@@ -156,19 +52,26 @@ class Login extends Component {
     }
 
     render() {
-        // console.log(this.props);
+        // eslint-disable-next-line react/destructuring-assignment
+        // console.log(this.props.form.getFieldProps('email').value);
         const { loading } = this.state;
         const { form, errors } = this.props;
         // const { getFieldDecorator } = form;
 
         return (
-            <form onSubmit={this.handleSubmit} id="logIn">
+            <Form onSubmit={this.handleSubmit} id="logIn">
                 <h1 className="text-center font-weight-light mb-4">Login</h1>
                 <Email form={form} />
                 <Password form={form} />
-                <RememberMe form={form} />
+                <div className="row">
+                    <div className="col-6">
+                        <RememberMe className="float-left" form={form} />
+                    </div>
+                    <div className="col-6">
+                        <Link className="float-right mb-2" to="/">Forgot password</Link>
+                    </div>
+                </div>
 
-                <Link className="float-right small mb-2" to="/">Forgot password</Link>
                 <Button className="btn btn-primary" htmlType="submit" loading={loading} block>
                     Log in
                 </Button>
@@ -178,7 +81,7 @@ class Login extends Component {
                 <Link to="/signup" className="btn btn-block btn-outline-primary mt-3">
                     Signup
                 </Link>
-            </form>
+            </Form>
         );
     }
 }
