@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
@@ -13,29 +13,31 @@ import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
 import { auth } from '../../Actions/authAction';
 import { Email, Password, RememberMe } from './_FormComponent';
 
-export class Login extends Component {
+export class Login extends PureComponent {
     static propTypes = {
         form: PropTypes.oneOfType([PropTypes.object]).isRequired,
     };
 
     state = {
         loading: false,
+        errors: null,
     }
 
 
-    componentWillReceiveProps(nextProps) {
-        const { errors } = this.props;
-        if (nextProps.errors !== errors) {
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.errors !== prevState.errors) {
             if (nextProps.errors.errorInfos.hasErrors) {
-                this.setState({
-                    loading: false,
-                });
                 message.destroy();
             }
             if (nextProps.errors.errorInfos.messages && nextProps.errors.errorInfos.componentError) {
                 message.error(nextProps.errors.errorInfos.messages);
             }
+            return {
+                loading: false,
+                errors: nextProps.errors,
+            };
         }
+        return null;
     }
 
     handleSubmit = (e) => {
@@ -52,15 +54,11 @@ export class Login extends Component {
     }
 
     render() {
-        // eslint-disable-next-line react/destructuring-assignment
-        // console.log(this.props.form.getFieldProps('email').value);
         const { loading } = this.state;
         const { form, errors } = this.props;
-        // const { getFieldDecorator } = form;
-
         return (
-            <Form onSubmit={this.handleSubmit} id="logIn">
-                <h1 className="text-center font-weight-light mb-4">Login</h1>
+            <Form onSubmit={this.handleSubmit}>
+                <h1 className="text-center font-weight-light mb-4">asdasd</h1>
                 <Email form={form} />
                 <Password form={form} />
                 <div className="row">
@@ -96,9 +94,6 @@ const mapStateToProps = state => ({
     errors: state.errors,
 });
 
-const LoginForm = Form.create()(Login);
-// export {
-//     LoginForm,
-// };
+export const LoginForm = Form.create()(Login);
+
 export default withRouter(connect(mapStateToProps)(LoginForm));
-// export default WrappedNormalLoginForm;

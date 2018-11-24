@@ -10,3 +10,6 @@
 .ant-form-item-control {
     line-height: inherit;
 }
+.btn-primary:focus {
+    @extend .btn-primary:hover;
+}
