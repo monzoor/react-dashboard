@@ -26,7 +26,10 @@ const { form } = formRef.props;
 
 
 describe('This is login test', () => {
-    // Done test
+    it('should render correctly in "debug" mode', () => {
+        const component = shallow(<Login form={form} {...props} debug />);
+        expect(component).toMatchSnapshot();
+    });
     it('Find login component', () => {
         const appWrapper = mount(
             <MemoryRouter>

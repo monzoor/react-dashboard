@@ -58,7 +58,7 @@ export class Login extends PureComponent {
         const { form, errors } = this.props;
         return (
             <Form onSubmit={this.handleSubmit}>
-                <h1 className="text-center font-weight-light mb-4">asdasd</h1>
+                <h1 className="text-center font-weight-light mb-4">Login</h1>
                 <Email form={form} />
                 <Password form={form} />
                 <div className="row">
