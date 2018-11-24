@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MemoryRouter } from 'react-router';
 // eslint-enable-next-line import/no-extraneous-dependencies
-import LoginFormCompoent, { Login, LoginForm } from './Login';
-import { Email, Password } from './_FormComponent';
-import App from '../App';
+import LoginFormCompoent, { Login, LoginForm } from '../Login';
+import { Email, Password } from '../_FormComponent';
+import App from '../../App';
 // import { mountWrap } from './testHelper';
-import store from '../../Store';
+import store from '../../../Store';
 
 const props = {
     errors: {
