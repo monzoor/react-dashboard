@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Signup, SignupForm } from '../SignUp';
@@ -145,3 +146,4 @@ describe('This is Sign up test', () => {
         });
     });
 });
+/* eslint-enable no-undef */
