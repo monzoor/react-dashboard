@@ -68,8 +68,8 @@
   "jest": {
     "verbose": false,
     "collectCoverage": true,
+    "notify": true,
     "collectCoverageFrom": [
-        "./src/Components/**/*.{js,jsx}",
         "!**/node_modules/**",
         "!**/vendor/**"
     ]
