@@ -11,7 +11,7 @@ import AuthLayout from '../Components/Layout/AuthLayout';
 import NotFound from '../Components/404';
 import Home from '../Components/Home';
 import Private from '../Components/Home/private';
-import LoginCompoent from '../Components/Auth/Login';
+import LogIn from '../Components/Auth/Login';
 import SignUp from '../Components/Auth/SignUp';
 import { verifyToken } from '../Utils/setAuthToken';
 
@@ -73,7 +73,7 @@ const Switches = () => (
     <Router>
         <div>
             <Switch>
-                <AppRoute path="/login" type="public" exact component={LoginCompoent} layout={AuthLayout} />
+                <AppRoute path="/login" type="public" exact component={LogIn} layout={AuthLayout} />
                 <AppRoute path="/signup" type="public" exact component={SignUp} layout={AuthLayout} />
                 <AppRoute path="/" type="private" exact component={Home} layout={MainLayout} />
                 <AppRoute path="/private" type="private" exact component={Private} layout={MainLayout} />

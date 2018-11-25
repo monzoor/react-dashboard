@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
@@ -13,7 +13,7 @@ import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
 import { auth } from '../../Actions/authAction';
 import { Email, Password, RememberMe } from './_FormComponent';
 
-export class Login extends PureComponent {
+export class Login extends Component {
     static propTypes = {
         form: PropTypes.oneOfType([PropTypes.object]).isRequired,
     };
@@ -49,7 +49,9 @@ export class Login extends PureComponent {
                     loading: true,
                 });
                 dispatch(auth(this.props, values));
+                return true;
             }
+            return false;
         });
     }
 

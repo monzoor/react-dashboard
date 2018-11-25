@@ -27,7 +27,7 @@ const Email = (props) => {
         <FormItem className="form-group">
             <Input
             //   className={errors && 'has-error'}
-              prefix={<Icon type="user" className="text-muted" />}
+              prefix={<Icon type="mail" className="text-muted" />}
               type="text"
               placeholder="Email"
               {...getFieldProps('email', {
@@ -45,6 +45,43 @@ const Email = (props) => {
         </FormItem>
     );
 };
+
+const Name = (props) => {
+    const { form } = props;
+    // const { getFieldProps, getFieldError } = form;
+    const { getFieldProps } = form;
+    // const errors = getFieldError('email');
+    // console.log(form);
+    // setTimeout(() => {
+    //     form.setFields({
+    //         email: {
+    //             value: 'asdasd',
+    //         },
+    //     });
+    // }, 500);
+    return (
+        <FormItem className="form-group">
+            <Input
+            //   className={errors && 'has-error'}
+              prefix={<Icon type="user" className="text-muted" />}
+              type="text"
+              placeholder="Name"
+              {...getFieldProps('name', {
+                                rules: [{
+                                    required: true,
+                                    min: 3,
+                                },
+                            ],
+                        })
+                    }
+            />
+            <div>
+                {/* {errors ? errors.join(',') : null} */}
+            </div>
+        </FormItem>
+    );
+};
+
 const Password = (props) => {
     const { form } = props;
     // const { getFieldProps, getFieldError } = form;
@@ -89,6 +126,7 @@ const RememberMe = () => (
 );
 
 export {
+    Name,
     Email,
     Password,
     RememberMe,
