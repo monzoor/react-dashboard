@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Login, LoginForm } from '../Login';
@@ -118,3 +119,4 @@ describe('This is login test', () => {
         });
     });
 });
+/* eslint-enable no-undef */
