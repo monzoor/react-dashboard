@@ -1,11 +1,14 @@
 import React from 'react';
-
+// eslint-disable-next-line import/no-extraneous-dependencies
+import createHistory from 'history/createBrowserHistory';
 import {
-    BrowserRouter as Router, Route, Switch, Redirect,
+    Router, Route, Switch, Redirect,
 } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import { dispatch } from 'rxjs/internal/observable/range';
 import MainLayout from '../Components/Layout';
 import AuthLayout from '../Components/Layout/AuthLayout';
 import NotFound from '../Components/404';
@@ -14,7 +17,18 @@ import Private from '../Components/Home/private';
 import LogIn from '../Components/Auth/Login';
 import SignUp from '../Components/Auth/SignUp';
 import { verifyToken } from '../Utils/setAuthToken';
+import store from '../Store';
 
+const history = createHistory();
+
+// TODO: Fix default clear error
+// history.listen((location) => {
+history.listen(() => {
+    // Dispatch action depending on location...
+    store.dispatch({
+        type: 'CLEAR_ERROR_MESSAGES',
+    });
+});
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
     const status = Object.values({ ...rest.location.state })[0];
@@ -70,7 +84,7 @@ AppRoute.propTypes = {
 };
 
 const Switches = () => (
-    <Router>
+    <Router history={history}>
         <div>
             <Switch>
                 <AppRoute path="/login" type="public" exact component={LogIn} layout={AuthLayout} />

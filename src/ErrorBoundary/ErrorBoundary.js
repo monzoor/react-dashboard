@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Alert } from 'antd';
 // import NotFound from '../Components/404';
 
 // const test = () => (
@@ -56,9 +57,12 @@ class ErrorBoundary extends Component {
                 }
             }
             return (
-                <div className="alert alert-danger py-0 mt-3">
-                    {messages}
-                </div>
+                <Alert
+                  description={messages}
+                  type="error"
+                  closable
+                  showIcon
+                />
             );
         }
 

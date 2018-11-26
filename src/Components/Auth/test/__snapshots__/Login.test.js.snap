@@ -109,7 +109,7 @@ exports[`This is login test should render correctly in "debug" mode 1`] = `
   </div>
   <Button
     block={true}
-    className="btn btn-primary"
+    className="btn btn-primary mb-2"
     ghost={false}
     htmlType="submit"
     loading={false}

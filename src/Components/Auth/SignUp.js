@@ -65,7 +65,7 @@ export class Signup extends Component {
                 <Name form={form} />
                 <Email form={form} />
                 <Password form={form} />
-                <Button className="btn btn-primary mb-4" htmlType="submit" loading={loading} block>
+                <Button className="btn btn-primary mb-2" htmlType="submit" loading={loading} block>
                     Sign Up
                 </Button>
                 <ErrorBoundary>

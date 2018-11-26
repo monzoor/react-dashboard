@@ -89,7 +89,7 @@ exports[`This is Sign up test should render correctly in "debug" mode 1`] = `
   />
   <Button
     block={true}
-    className="btn btn-primary mb-4"
+    className="btn btn-primary mb-2"
     ghost={false}
     htmlType="submit"
     loading={false}

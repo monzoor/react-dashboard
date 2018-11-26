@@ -72,7 +72,7 @@ export class Login extends Component {
                     </div>
                 </div>
 
-                <Button className="btn btn-primary" htmlType="submit" loading={loading} block>
+                <Button className="btn btn-primary mb-2" htmlType="submit" loading={loading} block>
                     Log in
                 </Button>
                 <ErrorBoundary>
