@@ -5,7 +5,14 @@ import landingImage from '../../assets/images/bg-auth-left.jpg';
 import landingImage2 from '../../assets/images/bg-auth-right.jpg';
 
 
-class MainLayout extends Component {
+class AuthLayout extends Component {
+    static propTypes = {
+        children: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.arrayOf(PropTypes.node),
+        ]).isRequired,
+    };
+
     render() {
         const { children } = this.props;
         const fadeIn = keyframes`
@@ -37,11 +44,5 @@ class MainLayout extends Component {
         );
     }
 }
-MainLayout.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.arrayOf(PropTypes.node),
-    ]).isRequired,
-};
 
-export default MainLayout;
+export default AuthLayout;

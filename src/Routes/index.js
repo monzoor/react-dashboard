@@ -7,8 +7,6 @@ import {
 
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-// import { dispatch } from 'rxjs/internal/observable/range';
 import DashboardLayout from '../Components/Layout/DashboardLayout';
 import AuthLayout from '../Components/Layout/AuthLayout';
 import NotFound from '../Components/404';

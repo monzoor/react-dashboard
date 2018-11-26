@@ -7,10 +7,15 @@ const {
     Header,
 } = Layout;
 
-const HeadBar = () => (
-    <Header style={{ background: '#fff', padding: 0 }}>
-        <p>this is header</p>
-    </Header>
-);
+const HeadBar = (user) => {
+    const { name } = user;
+    return (
+        <Header style={{ background: '#fff', padding: 0 }}>
+            <p>
+                { name }
+            </p>
+        </Header>
+    );
+};
 
 export default HeadBar;
