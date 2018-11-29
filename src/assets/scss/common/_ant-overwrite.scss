@@ -13,3 +13,6 @@
 .btn-primary:focus {
     @extend .btn-primary:hover;
 }
+a:hover {
+    text-decoration: none;
+}
