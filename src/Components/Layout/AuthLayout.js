@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
+import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
-
 import landingImage from '../../assets/images/bg-auth-left.jpg';
 import landingImage2 from '../../assets/images/bg-auth-right.jpg';
 
@@ -9,6 +8,17 @@ import landingImage2 from '../../assets/images/bg-auth-right.jpg';
 class MainLayout extends Component {
     render() {
         const { children } = this.props;
+        const fadeIn = keyframes`
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+                `;
+        const FadeInAnimation = styled.div`
+                    animation: ${fadeIn} 1s;
+                    `;
         return (
             <div className="container-fluid">
                 <div className="row minvh-100">
@@ -16,7 +26,9 @@ class MainLayout extends Component {
                     <div className="col-lg-6 col-12 d-flex landing landing-right" style={{ backgroundImage: `url(${landingImage2})` }}>
                         <div className="row align-items-center minvh-100 w-100 mx-0">
                             <div className="col-lg-8 col-12 mx-auto">
-                                {children}
+                                <FadeInAnimation>
+                                    {children}
+                                </FadeInAnimation>
                             </div>
                         </div>
                     </div>

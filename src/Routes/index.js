@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 // import { dispatch } from 'rxjs/internal/observable/range';
-import MainLayout from '../Components/Layout';
+import DashboardLayout from '../Components/Layout/DashboardLayout';
 import AuthLayout from '../Components/Layout/AuthLayout';
 import NotFound from '../Components/404';
 import Home from '../Components/Home';
@@ -89,9 +89,9 @@ const Switches = () => (
             <Switch>
                 <AppRoute path="/login" type="public" exact component={LogIn} layout={AuthLayout} />
                 <AppRoute path="/signup" type="public" exact component={SignUp} layout={AuthLayout} />
-                <AppRoute path="/" type="private" exact component={Home} layout={MainLayout} />
-                <AppRoute path="/private" type="private" exact component={Private} layout={MainLayout} />
-                <AppRoute path="*" exact component={NotFound} layout={MainLayout} status={404} />
+                <AppRoute path="/" type="private" exact component={Home} layout={DashboardLayout} />
+                <AppRoute path="/private" type="private" exact component={Private} layout={DashboardLayout} />
+                <AppRoute path="*" exact component={NotFound} layout={DashboardLayout} status={404} />
             </Switch>
         </div>
     </Router>
