@@ -7,8 +7,8 @@ import {
 
 import PropTypes from 'prop-types';
 
-import DashboardLayout from '../Components/Layout/DashboardLayout';
-import AuthLayout from '../Components/Layout/AuthLayout';
+import DashboardLayout from '../Components/Layout/Dashboard/DashboardLayout';
+import AuthLayout from '../Components/Layout/Auth/AuthLayout';
 import NotFound from '../Components/404';
 import Home from '../Components/Home';
 import Private from '../Components/Home/private';
