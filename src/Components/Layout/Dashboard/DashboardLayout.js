@@ -12,7 +12,7 @@ import Footer from './Footer';
 
 import BreadCrumb from './BreadCrumb';
 
-class MainLayout extends Component {
+class DashboardLayout extends Component {
     static propTypes = {
         children: PropTypes.oneOfType([
             PropTypes.node,
@@ -61,7 +61,7 @@ class MainLayout extends Component {
 const mapStateToProps = state => ({
     users: state.auth.users,
 });
-export default connect(mapStateToProps)(MainLayout);
+export default connect(mapStateToProps)(DashboardLayout);
 // const mapStateToProps = state => ({
 //     errors: state.errors,
 // });

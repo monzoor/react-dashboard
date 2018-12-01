@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
-import landingImage from '../../assets/images/bg-auth-left.jpg';
-import landingImage2 from '../../assets/images/bg-auth-right.jpg';
+import landingImage from '../../../assets/images/bg-auth-left.jpg';
+import landingImage2 from '../../../assets/images/bg-auth-right.jpg';
 
 
 class AuthLayout extends Component {
