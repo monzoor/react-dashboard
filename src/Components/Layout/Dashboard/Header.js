@@ -32,13 +32,13 @@ const ProfileMenu = (
 const HeadBar = (user) => {
     const { name } = user;
     return (
-        <Header className="bg-white row mx-0">
+        <Header className="bg-transparent row mx-0">
             <div className="col-auto ml-auto">
                 <Notification />
                 <Avatar className="mr-2 lh-initial" style={{ backgroundColor: '#87d068' }} icon="user" size="small" />
                 <Dropdown overlay={ProfileMenu} placement="bottomRight">
                     <a className="ant-dropdown-link text-dark">
-                        <span className="small text-capitalize">
+                        <span className="small text-capitalize font-weight-light">
                             Hi,
                             { name }
                         </span>
