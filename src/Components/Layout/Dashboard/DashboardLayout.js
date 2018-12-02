@@ -10,8 +10,6 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
 
-import BreadCrumb from './BreadCrumb';
-
 class DashboardLayout extends Component {
     static propTypes = {
         children: PropTypes.oneOfType([
@@ -41,7 +39,6 @@ class DashboardLayout extends Component {
                 <Sidebar />
                 <Layout className="minvh-100">
                     <Header {...users} />
-                    <BreadCrumb />
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12 minvh-100">

@@ -5,6 +5,7 @@ import {
     Menu,
     Icon,
 } from 'antd';
+import logo from '../../../assets/images/cc.svg';
 
 const {
     Sider,
@@ -15,7 +16,7 @@ class Sidebar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            collapsed: false,
+            collapsed: true,
         };
     }
 
@@ -27,12 +28,15 @@ class Sidebar extends Component {
         const { location } = this.props;
         const { collapsed } = this.state;
         return (
-            <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-                <div className="logo">
-                    <h1>asdasd</h1>
+            <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} style={{ background: '#fff' }}>
+                <div className="logo text-center">
+                    <p className="text-black h4 my-2" style={{ fontWeight: 100, margin: '20px 0' }}>
+                        <img src={logo} alt="" className={collapsed || 'mr-2'} width="30px" />
+                        {collapsed || 'CodeCave' }
+                    </p>
                 </div>
-                <Menu theme="dark" selectedKeys={[location.pathname]} mode="inline">
-                    <Menu.Item key="/">
+                <Menu theme="light" selectedKeys={[location.pathname]} mode="inline" style={{ height: '100%' }}>
+                    <Menu.Item className="mt-0" key="/">
                         <Icon type="pie-chart" />
                         <span>Home</span>
                         <Link to="/" />
