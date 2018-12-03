@@ -17,17 +17,15 @@ const Notifications = (
         </div>
     </div>
 );
-const HeadBar = () => {
-    console.log('00');
-    return (
-        <Dropdown className="mr-4" overlay={Notifications} placement="bottomRight" trigger={['click']}>
-            <a className="ant-dropdown-link" href="#">
-                <Badge dot>
-                    <Icon className="text-size-regular" type="notification" />
-                </Badge>
-            </a>
-        </Dropdown>
-    );
-};
+
+const HeadBar = () => (
+    <Dropdown className="mr-4" overlay={Notifications} placement="bottomRight" trigger={['click']}>
+        <a className="ant-dropdown-link" href="#">
+            <Badge dot>
+                <Icon className="text-size-regular" type="notification" />
+            </Badge>
+        </a>
+    </Dropdown>
+);
 
 export default HeadBar;
