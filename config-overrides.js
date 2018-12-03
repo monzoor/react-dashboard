@@ -4,6 +4,7 @@ const { paths } = require('react-app-rewired');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const rewireSass = require('react-app-rewire-scss');
 const rewireLess = require('react-app-rewire-less');
+const antTheme = require('./src/assets/AntTheme/Theme');
 
 module.exports = function override(config, env) {
     config = injectBabelPlugin(
@@ -12,6 +13,7 @@ module.exports = function override(config, env) {
     );
 
     config = rewireLess.withLoaderOptions({
+        modifyVars: antTheme,
         javascriptEnabled: true,
     })(config, env);
     config.module.rules = [

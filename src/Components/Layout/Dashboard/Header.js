@@ -7,6 +7,7 @@ import {
 } from 'antd';
 import { Link } from 'react-router-dom';
 import Notification from './Notification';
+import logo from '../../../assets/images/cc.svg';
 
 const {
     Header,
@@ -33,7 +34,12 @@ const HeadBar = (user) => {
     const { name } = user;
     return (
         <Header className="bg-transparent row mx-0">
-            <div className="col-auto ml-auto">
+            <div className="col-auto mx-auto py-3">
+                <img src={logo} alt="" className="mr-2 float-left" width="20px" />
+                <span className="h5 float-left" style={{ fontWeight: 300, margin: '2px 0' }}>CodeCave</span>
+                <div className="clearfix">&nbsp;</div>
+            </div>
+            <div className="col-auto float-right">
                 <Notification />
                 <Avatar className="mr-2 lh-initial" style={{ backgroundColor: '#87d068' }} icon="user" size="small" />
                 <Dropdown overlay={ProfileMenu} placement="bottomRight">
