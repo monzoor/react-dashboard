@@ -42,10 +42,18 @@ class Sidebar extends Component {
                 </div>
                 <Menu className="border-0 " theme="light" selectedKeys={[location.pathname]} mode="inline">
                     <Menu.Item className="mt-0" key="/">
-                        <Icon type="gift" />
-                        <span>Dashboard</span>
+                        <Icon type="home" />
+                        <span>Product</span>
                         <Link to="/" />
                     </Menu.Item>
+
+
+                    <Menu.Item className="mt-0" key="/product/list">
+                        <Icon type="gift" />
+                        <span>Product</span>
+                        <Link to="/product/list" />
+                    </Menu.Item>
+
                     <Menu.Item key="/private">
                         <Icon type="desktop" />
                         <span>Private</span>

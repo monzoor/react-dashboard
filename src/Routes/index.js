@@ -6,16 +6,9 @@ import {
 } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
-
-import DashboardLayout from '../Components/Layout/Dashboard/DashboardLayout';
-import AuthLayout from '../Components/Layout/Auth/AuthLayout';
-import NotFound from '../Components/404';
-import Home from '../Components/Home';
-import Private from '../Components/Home/private';
-import LogIn from '../Components/Auth/Login';
-import SignUp from '../Components/Auth/SignUp';
 import { verifyToken } from '../Utils/setAuthToken';
 import store from '../Store';
+import routes from './RouterConfig';
 
 const history = createHistory();
 
@@ -30,9 +23,9 @@ history.listen(() => {
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
     const status = Object.values({ ...rest.location.state })[0];
-    // console.log('+++++', rest.type);
+    // console.log('+++++', rest);
     const hasAuthenticated = verifyToken(localStorage.token);
-
+    // TODO: fix login redirect
     if (!hasAuthenticated && !rest.type) {
         return (<Redirect to="/login" />);
     }
@@ -46,7 +39,7 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => {
               {...rest}
               render={props => (
                   <Layout>
-                      <NotFound {...props} />
+                      <Component {...props} />
                   </Layout>
                 )}
             />
@@ -85,11 +78,18 @@ const Switches = () => (
     <Router history={history}>
         <div>
             <Switch>
-                <AppRoute path="/login" type="public" exact component={LogIn} layout={AuthLayout} />
-                <AppRoute path="/signup" type="public" exact component={SignUp} layout={AuthLayout} />
-                <AppRoute path="/" type="private" exact component={Home} layout={DashboardLayout} />
-                <AppRoute path="/private" type="private" exact component={Private} layout={DashboardLayout} />
-                <AppRoute path="*" exact component={NotFound} layout={DashboardLayout} status={404} />
+                {routes.map((route, i) => (
+                    <AppRoute
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={i}
+                      path={route.path}
+                      type={route.type}
+                      exact={route.exact}
+                      component={route.component}
+                      layout={route.layout}
+                      status={route.layout || null}
+                    />
+                ))}
             </Switch>
         </div>
     </Router>
