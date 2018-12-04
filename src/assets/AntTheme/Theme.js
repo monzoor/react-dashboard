@@ -9,7 +9,7 @@ module.exports = {
     '@warning-color': '#FFAB00',
 
     '@body-background': '#FAFBFF',
-
+    '@layout-body-background': '@body-background',
     '@text-color': '#434B65',
 
     '@menu-item-active-bg': '@success-color',

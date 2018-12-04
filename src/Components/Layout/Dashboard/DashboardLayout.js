@@ -31,8 +31,6 @@ class DashboardLayout extends Component {
         `;
         const FadeInAnimation = styled.div`
             animation: ${fadeIn} 1s;
-            background: #fff;
-            min-height: 80vh;
             `;
         return (
             <Layout className="minvh-100">

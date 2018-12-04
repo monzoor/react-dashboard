@@ -40,9 +40,9 @@ class Sidebar extends Component {
                       onClick={this.toggle}
                     />
                 </div>
-                <Menu className="h-100 border-0 " theme="light" selectedKeys={[location.pathname]} mode="inline">
+                <Menu className="border-0 " theme="light" selectedKeys={[location.pathname]} mode="inline">
                     <Menu.Item className="mt-0" key="/">
-                        <Icon type="dashboard" />
+                        <Icon type="gift" />
                         <span>Dashboard</span>
                         <Link to="/" />
                     </Menu.Item>
