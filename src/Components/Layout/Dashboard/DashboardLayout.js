@@ -37,7 +37,7 @@ class DashboardLayout extends Component {
                 <Sidebar />
                 <Layout className="minvh-100">
                     <Header {...users} />
-                    <div className="container-fluid">
+                    <div className="container-fluid px-5">
                         <div className="row">
                             <div className="col-12 minvh-100">
                                 <FadeInAnimation>
