@@ -14,6 +14,7 @@ import Home from '../Components/Home'; // delete
 import Private from '../Components/Home/private'; // delete
 
 import ProductList from '../Components/Product/List';
+import ProductAdd from '../Components/Product/Add';
 
 export default [
     {
@@ -49,7 +50,7 @@ export default [
         path: '/product/add',
         type: 'private',
         exact: true,
-        component: ProductList,
+        component: ProductAdd,
         layout: DashboardLayout,
     },
 
