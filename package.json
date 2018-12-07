@@ -26,6 +26,7 @@
     "eslint-loader": "^2.1.1",
     "json-server": "^0.14.0",
     "jsonwebtoken": "^8.3.0",
+    "multer": "^1.4.1",
     "node-sass": "^4.9.3",
     "password-hash": "^1.2.2",
     "prop-types": "^15.6.2",
@@ -42,6 +43,7 @@
     "serve": "^10.0.2",
     "sinon": "^7.1.1",
     "styled-components": "^4.1.2",
+    "uniqid": "^5.0.3",
     "validate.js": "^0.12.0"
   },
   "scripts": {
