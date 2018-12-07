@@ -3,6 +3,9 @@ const jsonServer = require('json-server');
 const pause = require('connect-pause');
 const jwt = require('jsonwebtoken');
 const passwordHash = require('password-hash');
+const multer = require('multer');
+const uniqid = require('uniqid');
+
 require('dotenv').config();
 // const axios = require('axios');
 
@@ -16,8 +19,35 @@ server.use(middlewares);
 
 
 const SECRET_KEY = '123456789';
-
 const expiresIn = '1h';
+
+// const upload = multer({ dest: 'uploads/' });
+
+const storage = multer.diskStorage({
+    destination(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename(req, file, cb) {
+        cb(null, `${new Date().getTime()}_${uniqid()}.jpg`);
+    },
+});
+
+const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+const upload = multer({
+    storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5, // 5MB
+    },
+    fileFilter,
+});
 
 // Create a token from a payload
 function createToken(payload) {
@@ -80,6 +110,11 @@ server.post('/users', (req, res, next) => {
         return;
     }
     next();
+});
+
+server.post('/upload', upload.array('productImage', 2), (req, res, next) => {
+    console.log(res);
+    return;
 });
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
