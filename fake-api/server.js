@@ -1,5 +1,7 @@
 const fs = require('fs');
 const jsonServer = require('json-server');
+const path = require('path');
+const express = require('express');
 const pause = require('connect-pause');
 const jwt = require('jsonwebtoken');
 const passwordHash = require('password-hash');
@@ -13,6 +15,7 @@ const middlewares = jsonServer.defaults();
 
 const server = jsonServer.create();
 const router = jsonServer.router('./fake-api/database.json');
+server.use('/', express.static(path.join(__dirname, 'public')));
 
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
@@ -25,7 +28,7 @@ const expiresIn = '1h';
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, './fake-api/public/uploads/');
     },
     filename(req, file, cb) {
         cb(null, `${new Date().getTime()}_${uniqid()}.jpg`);
@@ -37,7 +40,7 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg') {
         cb(null, true);
     } else {
-        cb(null, false);
+        cb(new Error('type unmatched'), false);
     }
 };
 
@@ -47,7 +50,8 @@ const upload = multer({
         fileSize: 1024 * 1024 * 5, // 5MB
     },
     fileFilter,
-});
+}).single('productImage');
+// }).array('productImage', 2);
 
 // Create a token from a payload
 function createToken(payload) {
@@ -112,9 +116,23 @@ server.post('/users', (req, res, next) => {
     next();
 });
 
-server.post('/upload', upload.array('productImage', 2), (req, res, next) => {
-    console.log(res);
-    return;
+server.post('/upload', (req, res) => {
+    // console.log(res);
+    // return;
+    // upload.array('productImage', 2)
+    upload(req, res, (err) => {
+        if (err) {
+            const status = 415;
+            const message = `Error to upload file ${err}`;
+            res.status(status).json({ status, message });
+        } else {
+            const imageFileNames = (typeof req.files !== 'undefined') ? req.files.map(value => value.filename) : req.file;
+            console.log(imageFileNames);
+            const status = 200;
+            // const message = `File ${req.files[0].filename} successfully uploaded`;
+            res.status(status).json({ status, response: imageFileNames });
+        }
+    });
 });
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
