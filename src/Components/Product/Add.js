@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProgressSteps from './Add/Steps';
+import ImageUpload from './Add/Images';
 
 class ProductAdd extends Component {
     state = {
@@ -16,6 +17,9 @@ class ProductAdd extends Component {
                 </div>
                 <div className="col-12">
                     <ProgressSteps current={currentSteps} />
+                </div>
+                <div className="col-6">
+                    <ImageUpload />
                 </div>
             </div>
         );
