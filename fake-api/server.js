@@ -117,10 +117,10 @@ server.post('/users', (req, res, next) => {
 });
 
 server.post('/upload', (req, res) => {
-    // console.log(res);
     // return;
     // upload.array('productImage', 2)
     upload(req, res, (err) => {
+        console.log(req.file);
         if (err) {
             const status = 415;
             const message = `Error to upload file ${err}`;
@@ -130,7 +130,7 @@ server.post('/upload', (req, res) => {
             console.log(imageFileNames);
             const status = 200;
             // const message = `File ${req.files[0].filename} successfully uploaded`;
-            res.status(status).json({ status, response: imageFileNames });
+            res.status(status).json({ status, url: `${process.env.REACT_APP_API_URL}/uploads/${imageFileNames.filename}` });
         }
     });
 });
