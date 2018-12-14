@@ -11,6 +11,8 @@ const {
     Sider,
 } = Layout;
 
+// eslint-disable-next-line prefer-destructuring
+const SubMenu = Menu.SubMenu;
 
 class Sidebar extends Component {
     state = {
@@ -47,12 +49,24 @@ class Sidebar extends Component {
                         <Link to="/" />
                     </Menu.Item>
 
-
-                    <Menu.Item className="mt-0" key="/product/list">
-                        <Icon type="gift" />
-                        <span>Product</span>
-                        <Link to="/product/list" />
-                    </Menu.Item>
+                    <SubMenu
+                      key="/product/list"
+                      title={(
+                          <span>
+                              <Icon type="gift" />
+                              <span>Product</span>
+                          </span>
+                        )}
+                    >
+                        <Menu.Item key="/product/list">
+                            <span>List</span>
+                            <Link to="/product/list" />
+                        </Menu.Item>
+                        <Menu.Item key="/product/add">
+                            <span>Add</span>
+                            <Link to="/product/add" />
+                        </Menu.Item>
+                    </SubMenu>
 
                     <Menu.Item key="/private">
                         <Icon type="desktop" />
