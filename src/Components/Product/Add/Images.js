@@ -19,7 +19,7 @@ const beforeUpload = (file) => {
     return isJPG && isLt;
 };
 
-class MyUpload extends PureComponent {
+class ImageUpload extends PureComponent {
     state = {
         // fileList: [{
         //     uid: '1544795020972_1kc1kesjjpo32iss',
@@ -152,4 +152,4 @@ class MyUpload extends PureComponent {
 }
 
 
-export default MyUpload;
+export default ImageUpload;
