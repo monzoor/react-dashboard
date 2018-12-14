@@ -9,7 +9,6 @@ const multer = require('multer');
 const uniqid = require('uniqid');
 
 require('dotenv').config();
-// const axios = require('axios');
 
 const middlewares = jsonServer.defaults();
 
@@ -47,11 +46,11 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage,
     limits: {
-        fileSize: 1024 * 1024 * 5, // 5MB
+        fileSize: 1024 * 1024 * 10, // 10MB
     },
     fileFilter,
-}).single('productImage');
-// }).array('productImage', 2);
+// }).single('productImage');
+}).array('productImage', 1000);
 
 // Create a token from a payload
 function createToken(payload) {
@@ -117,20 +116,26 @@ server.post('/users', (req, res, next) => {
 });
 
 server.post('/upload', (req, res) => {
-    // return;
+    if (typeof verifyToken(req.headers.authorization) !== 'object') {
+        const status = 401;
+        const message = 'Unauthorised';
+        res.status(status).json({ status, message });
+    }
     // upload.array('productImage', 2)
     upload(req, res, (err) => {
-        console.log(req.file);
         if (err) {
             const status = 415;
             const message = `Error to upload file ${err}`;
             res.status(status).json({ status, message });
         } else {
-            const imageFileNames = (typeof req.files !== 'undefined') ? req.files.map(value => value.filename) : req.file;
-            console.log(imageFileNames);
             const status = 200;
-            // const message = `File ${req.files[0].filename} successfully uploaded`;
-            res.status(status).json({ status, url: `${process.env.REACT_APP_API_URL}/uploads/${imageFileNames.filename}` });
+            const uploadedData = req.files.map(data => ({
+                uid: data.filename.replace('.jpg', ''),
+                name: data.originalname,
+                status: 200,
+                url: `${process.env.REACT_APP_API_URL}/uploads/${data.filename}`,
+            }));
+            res.status(status).json(uploadedData[0]);
         }
     });
 });
