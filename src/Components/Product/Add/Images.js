@@ -1,48 +1,96 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
     Upload,
-    // Button,
     Icon,
     Modal,
+    message,
 } from 'antd';
+import config from './_config';
 
-class MyUpload extends Component {
+const beforeUpload = (file) => {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+        message.error('You can only upload JPG file!');
+    }
+    const isLt = file.size / 1024 / 1024 < config.maxImageUploadSize;
+    if (!isLt) {
+        message.error(`Image must smaller than ${config.maxImageUploadSize}MB!`);
+    }
+    return isJPG && isLt;
+};
+
+class MyUpload extends PureComponent {
     state = {
         // fileList: [{
-        //     uid: '-1',
+        //     uid: '1544795020972_1kc1kesjjpo32iss',
         //     name: 'xxx.png',
-        //     status: 'done',
-        //     url: 'http://www.baidu.com/xxx.jpg',
+        //     status: 200,
+        //     url: 'http://localhost:5555/uploads/1544795020972_1kc1kesjjpo32iss.jpg',
         // }],
         fileList: [],
         previewVisible: false,
         previewImage: '',
+        initBigUploader: true,
     }
 
-    handleCancel = () => this.setState({ previewVisible: false })
+    handleCancel = () => {
+        this.setState({ previewVisible: false });
+    }
+
+    updateImageDataList = (imageList) => {
+        const dataToSave = imageList.map(datas => datas.response);
+        const { onUpdate } = this.props;
+        onUpdate(dataToSave);
+    }
 
     handleChange = (info) => {
+        let fileQueueLength = 0;
         let { fileList } = info;
-        //   console.log('----', fileList);
+        if (info.file.status !== 'uploading') {
+            fileQueueLength = info.fileList.length;
+        }
+        if (info.file.status === 'uploading') {
+            if (fileList.length === 1) {
+                this.setState({
+                    initBigUploader: false,
+                });
+            }
+        }
+        if (info.file.status === 'removed') {
+            this.updateImageDataList(info.fileList);
+            message.warning('File deleted successfully');
+        }
+        if (info.file.status === 'done') {
+            message.success('File uploaded successfully');
+            const filteredData = info.fileList.filter(uploadedData => typeof uploadedData.response !== 'undefined');
+            if (filteredData.length === 1) {
+                this.setState({
+                    initBigUploader: false,
+                });
+            }
+            if (filteredData.length === fileQueueLength) {
+                this.updateImageDataList(filteredData);
+            }
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+
         // 1. Limit the number of uploaded files
         // Only to show two recent uploaded files, and old ones will be replaced by the new
-        fileList = fileList.slice(-3);
+        fileList = fileList.slice(-config.imageUploadLimit);
 
         // 2. Read from response and show file link
         fileList = fileList.map((file) => {
-            //   console.log('-----1---', file);
             if (file.response) {
                 // Component will show file.url as link
                 // eslint-disable-next-line no-param-reassign
                 file.url = file.response.url;
             }
-            // console.log(file);
             return file;
         });
 
         // 3. Filter successfully uploaded files according to response from server
         fileList = fileList.filter((file) => {
-            //   console.log('-----2---', file);
             if (file.response) {
                 return file.response.status === 200;
             }
@@ -59,17 +107,31 @@ class MyUpload extends Component {
         });
     }
 
-
     render() {
+        const {
+            previewVisible, previewImage, fileList, initBigUploader,
+        } = this.state;
+
         const props = {
             action: '//localhost:5555/upload',
+            headers: {
+                authorization: localStorage.token,
+            },
             onChange: this.handleChange,
             multiple: true,
             listType: 'picture-card',
             onPreview: this.handlePreview,
+            className: (initBigUploader) ? 'big-uploader' : '',
+            beforeUpload(file) {
+                return new Promise((resolve) => {
+                    const isValidated = beforeUpload(file);
+                    if (isValidated) {
+                        resolve(file);
+                    }
+                });
+            },
         };
-        // const { fileList } = this.state;
-        const { previewVisible, previewImage, fileList } = this.state;
+
         const uploadButton = (
             <div>
                 <Icon type="plus" />
@@ -78,8 +140,8 @@ class MyUpload extends Component {
         );
         return (
             <div>
-                <Upload {...props} fileList={fileList} name="productImage">
-                    {fileList.length >= 3 ? null : uploadButton}
+                <Upload name="productImage" {...props} fileList={fileList}>
+                    {fileList.length === config.imageUploadLimit ? null : uploadButton}
                 </Upload>
                 <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                     <img alt="example" style={{ width: '100%' }} src={previewImage} />
