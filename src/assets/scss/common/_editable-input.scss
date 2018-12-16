@@ -1,0 +1,15 @@
+.editable-container {
+    a {
+        color: inherit;
+        
+        * {
+            display: inline-block;
+        }
+    }
+    > a {
+        border-bottom: 1px dashed $brand-primary;
+    }
+    p, .form-group {
+        @extend .mb-0;
+    }
+}

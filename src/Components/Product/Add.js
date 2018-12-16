@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProgressSteps from './Add/Steps';
 import ImageUpload from './Add/Images';
+import ProductDetails from './Add/Details';
 
 class ProductAdd extends Component {
     state = {
@@ -43,15 +44,16 @@ class ProductAdd extends Component {
                     <ProgressSteps current={currentSteps.item} status={currentSteps.status} />
                 </div>
                 <div className="col-5 mb-5">
-                    <p className="h3 font-weight-light text-primary float-left">Images</p>
+                    <p className="h3 font-weight-light text-primary float-left mb-4">Images</p>
                     <span className="text-muted font-weight-light small mt-2 pt-1 mb-4 ml-3 float-left">Upload at least 1 image</span>
                     <div className="clearfix">&nbsp;</div>
                     <ImageUpload onUpdate={this.imageUploaded} />
                 </div>
                 <div className="col-7">
-                    <p className="h3 font-weight-light text-primary float-left">Product Details</p>
+                    <p className="h3 font-weight-light text-primary float-left mb-3">Product Details</p>
                     {/* <span className="text-muted font-weight-light small mt-2 pt-1 mb-4 ml-3 float-left">Upload at least 1 image</span> */}
                     <div className="clearfix">&nbsp;</div>
+                    <ProductDetails />
                 </div>
             </div>
         );
