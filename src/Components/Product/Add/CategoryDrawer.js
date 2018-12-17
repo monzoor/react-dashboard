@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-    Drawer, Tree, Badge, Icon,
+    Drawer, Tree, Badge,
 } from 'antd';
 
 const { TreeNode } = Tree;
@@ -77,6 +77,8 @@ class Home extends PureComponent {
         }).filter(items => (items !== null)).flat();
 
         this.setState({ checkedKeys, selectedCategoryNames });
+        const { onUpdate } = this.props;
+        onUpdate(checkedKeys);
     }
 
     // onSelect = (selectedKeys, info) => {
@@ -110,7 +112,6 @@ class Home extends PureComponent {
             if (selectedCategoryNames.length === 0) {
                 return (
                     <span className="badge badge-warning font-weight-light pointer">
-                        <Icon className="mr-2" type="edit" />
                         Add Category
                     </span>
                 );

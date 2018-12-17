@@ -22,6 +22,7 @@ module.exports = {
     },
     "rules": {
         "react/prop-types": 0,
+        "react/no-did-update-set-state": 0,
         "no-nested-ternary": 0,
         "no-console": process.env.NODE_ENV === 'production' ? 2 : 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]}],

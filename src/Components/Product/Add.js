@@ -10,15 +10,30 @@ class ProductAdd extends Component {
             status: 'wait',
         },
         images: '',
+        details: {
+            title: '',
+            categories: [],
+            description: '',
+        },
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { images } = this.state;
+        const { images, details } = this.state;
         if (images !== prevState.images) {
-            // eslint-disable-next-line react/no-did-update-set-state
             this.setState({
                 currentSteps: {
                     item: 0,
+                    status: 'finish',
+                },
+            });
+        }
+        if (details !== prevState.details) {
+            const totalLenth = Object.keys(details).length;
+            const hasAllValues = !!(Object.keys(details).filter(values => (typeof details[values] === 'undefined') || details[values].length !== 0).length === totalLenth);
+            if (!hasAllValues) return;
+            this.setState({
+                currentSteps: {
+                    item: 1,
                     status: 'finish',
                 },
             });
@@ -28,6 +43,18 @@ class ProductAdd extends Component {
     imageUploaded = (filelists) => {
         this.setState({
             images: filelists,
+        });
+    }
+
+    addDetails = (datas) => {
+        // console.log(datas);
+        const { title, categories, description } = datas;
+        this.setState({
+            details: {
+                title,
+                categories,
+                description,
+            },
         });
     }
 
@@ -51,9 +78,8 @@ class ProductAdd extends Component {
                 </div>
                 <div className="col-7">
                     <p className="h3 font-weight-light text-primary float-left mb-3">Product Details</p>
-                    {/* <span className="text-muted font-weight-light small mt-2 pt-1 mb-4 ml-3 float-left">Upload at least 1 image</span> */}
                     <div className="clearfix">&nbsp;</div>
-                    <ProductDetails />
+                    <ProductDetails onUpdate={this.addDetails} />
                 </div>
             </div>
         );

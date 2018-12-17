@@ -1,10 +1,30 @@
 import React, { PureComponent } from 'react';
 import Editable from 'react-x-editable';
-import { Icon } from 'antd';
 import CategoryDrawer from './CategoryDrawer';
 
 class ProductDetails extends PureComponent {
+    state = {
+        title: '',
+        categories: [],
+        description: '',
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { onUpdate } = this.props;
+        if (this.state !== prevState) {
+            onUpdate(this.state);
+        }
+    }
+
+    addCategories = (data) => {
+        // console.log(data);
+        this.setState({
+            categories: data,
+        });
+    }
+
     render() {
+        const { title, description } = this.state;
         return (
             <div className="row">
                 <div className="col-12 mb-4">
@@ -12,9 +32,9 @@ class ProductDetails extends PureComponent {
                         <Editable
                           name="username"
                           dataType="text"
+                          value={title}
                           emptyValueText={(
                               <h2 className="mb-0">
-                                  <Icon className="mr-2" type="edit" />
                                   Add Title
                               </h2>
                             )}
@@ -25,13 +45,16 @@ class ProductDetails extends PureComponent {
                             if (!value) {
                                 return (<div className="ant-form-explain small">Title cant not be blank.</div>);
                             }
+                            this.setState({
+                                title: value,
+                            });
                             return null;
                         }}
                         />
                     </div>
                 </div>
                 <div className="col-12 mb-4">
-                    <CategoryDrawer />
+                    <CategoryDrawer onUpdate={this.addCategories} />
                 </div>
                 <div className="col-12">
                     <Editable
@@ -39,14 +62,23 @@ class ProductDetails extends PureComponent {
                       dataType="textarea"
                       title="Enter description"
                       placement="right"
+                      value={description}
                       emptyValueText={(
                           <div>
-                              <Icon className="mr-2" type="edit" />
                               Add Description
                           </div>
                       )}
                       placeholder="Enter text in textarea"
                       showButtons={false}
+                      validate={(value) => {
+                        if (!value) {
+                            return (<div className="ant-form-explain small">Title cant not be blank.</div>);
+                        }
+                        this.setState({
+                            description: value,
+                        });
+                        return null;
+                    }}
                     />
                 </div>
             </div>
