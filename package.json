@@ -1,89 +1,40 @@
 {
-  "name": "react-dashboard",
-  "version": "1.0.0",
-  "description": "React dashboard. Without ejecting used eslint, sass, less, ant design, redux",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/monzoor/react-dashboard.git"
+  "name": "react-dashboard-api",
+  "version": "1.2.0",
+  "description": "Api for dashboard",
+  "engines": {
+    "node": "10.x"
   },
-  "author": "Monzoor Morshed Mahmud",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/monzoor/react-dashboard/issues"
+  "scripts": {
+    "start": "node server",
+    "heroku-postbuild": "cd dashboard/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "homepage": "./",
+  "cacheDirectories": [
+    "node_modules",
+    "dashboard/node_modules"
+  ],
   "dependencies": {
-    "antd": "^3.10.4",
-    "axios": "^0.18.0",
-    "babel-plugin-import": "^1.8.0",
-    "concurrently": "^4.0.1",
     "connect-pause": "^0.1.0",
     "dotenv": "^6.1.0",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-to-json": "^3.3.4",
-    "eslint-loader": "^2.1.1",
     "express": "^4.16.4",
     "json-server": "^0.14.0",
     "jsonwebtoken": "^8.3.0",
     "multer": "^1.4.1",
-    "node-sass": "^4.9.3",
     "password-hash": "^1.2.2",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.1",
-    "react-app-rewire-less": "^2.1.3",
-    "react-app-rewired": "^1.6.2",
-    "react-dev-utils": "^6.1.1",
-    "react-dom": "^16.6.1",
-    "react-redux": "^5.1.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.1",
-    "react-x-editable": "^0.0.10-beta",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "serve": "^10.0.2",
-    "sinon": "^7.1.1",
-    "styled-components": "^4.1.2",
-    "uniqid": "^5.0.3",
-    "validate.js": "^0.12.0"
-  },
-  "scripts": {
-    "fake-api": "node ./fake-api/server.js",
-    "go": "react-app-rewired start",
-    "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "local": "./node_modules/concurrently/bin/concurrently.js 'yarn fake-api' 'yarn go'",
-    "start": "./node_modules/concurrently/bin/concurrently.js 'npm run fake-api' 'serve -s build' ",
-    "heroku-postbuild": "npm run build",
-    "check-all": "CI=true yarn test && yarn build"
-  },
-  "devDependencies": {
-    "bootstrap": "^4.1.3",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
     "pre-commit": "^1.2.2",
-    "redux-mock-store": "^1.5.3"
+    "uniqid": "^5.0.3"
   },
-  "pre-commit": [
-    "check-all"
+  "author": "Monzoor Morshed Mahmud",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monzoor/react-dashboard.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "create-react-app",
+    "react"
   ],
-  "jest": {
-    "verbose": false,
-    "collectCoverage": true,
-    "notify": true,
-    "collectCoverageFrom": [
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ]
-  },
-  "proxy": "http://localhost:5555",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "license": "MIT",
+  "devDependencies": {}
 }

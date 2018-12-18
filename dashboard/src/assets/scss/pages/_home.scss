@@ -1,0 +1,9 @@
+.landing {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #E8E8EA;
+    &.landing-right{
+        background-size: 40%;
+        background-position: bottom;
+    }
+}

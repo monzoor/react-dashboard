@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`This is login test should render correctly in "debug" mode 1`] = `
+<Form
+  hideRequiredMark={false}
+  layout="horizontal"
+  onSubmit={[Function]}
+  prefixCls="ant-form"
+>
+  <h1
+    className="text-center font-weight-light mb-4"
+  >
+    Login
+  </h1>
+  <Email
+    form={
+      Object {
+        "getFieldDecorator": [Function],
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldProps": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "isSubmitting": [Function],
+        "resetFields": [Function],
+        "setFields": [Function],
+        "setFieldsInitialValue": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+        "validateFieldsAndScroll": [Function],
+      }
+    }
+  />
+  <Password
+    form={
+      Object {
+        "getFieldDecorator": [Function],
+        "getFieldError": [Function],
+        "getFieldInstance": [Function],
+        "getFieldProps": [Function],
+        "getFieldValue": [Function],
+        "getFieldsError": [Function],
+        "getFieldsValue": [Function],
+        "isFieldTouched": [Function],
+        "isFieldValidating": [Function],
+        "isFieldsTouched": [Function],
+        "isFieldsValidating": [Function],
+        "isSubmitting": [Function],
+        "resetFields": [Function],
+        "setFields": [Function],
+        "setFieldsInitialValue": [Function],
+        "setFieldsValue": [Function],
+        "submit": [Function],
+        "validateFields": [Function],
+        "validateFieldsAndScroll": [Function],
+      }
+    }
+  />
+  <div
+    className="row"
+  >
+    <div
+      className="col-6"
+    >
+      <RememberMe
+        className="float-left"
+        form={
+          Object {
+            "getFieldDecorator": [Function],
+            "getFieldError": [Function],
+            "getFieldInstance": [Function],
+            "getFieldProps": [Function],
+            "getFieldValue": [Function],
+            "getFieldsError": [Function],
+            "getFieldsValue": [Function],
+            "isFieldTouched": [Function],
+            "isFieldValidating": [Function],
+            "isFieldsTouched": [Function],
+            "isFieldsValidating": [Function],
+            "isSubmitting": [Function],
+            "resetFields": [Function],
+            "setFields": [Function],
+            "setFieldsInitialValue": [Function],
+            "setFieldsValue": [Function],
+            "submit": [Function],
+            "validateFields": [Function],
+            "validateFieldsAndScroll": [Function],
+          }
+        }
+      />
+    </div>
+    <div
+      className="col-6"
+    >
+      <Link
+        className="float-right mb-2"
+        replace={false}
+        to="/"
+      >
+        Forgot password
+      </Link>
+    </div>
+  </div>
+  <Button
+    block={true}
+    className="btn btn-primary mb-2"
+    ghost={false}
+    htmlType="submit"
+    loading={false}
+    prefixCls="ant-btn"
+  >
+    Log in
+  </Button>
+  <withRouter(Connect(ErrorBoundary))>
+    <ErrorThrower
+      errorInfos={
+        Object {
+          "hasErrors": false,
+        }
+      }
+      errorMessage="Crushed in login"
+    />
+  </withRouter(Connect(ErrorBoundary))>
+  <Link
+    className="btn btn-block btn-outline-primary mt-3"
+    replace={false}
+    to="/signup"
+  >
+    Signup
+  </Link>
+</Form>
+`;

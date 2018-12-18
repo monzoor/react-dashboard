@@ -2,13 +2,15 @@
 
 # dependencies
 /node_modules
+/dashboard/node_modules
 
 # testing
-/coverage
+/dashboard/coverage
 
 # production
-/build
+/dashboard/build
 /fake-api/public/uploads
+/server/public/uploads
 
 # misc
 .DS_Store
