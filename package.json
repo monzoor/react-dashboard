@@ -25,6 +25,7 @@
     "enzyme-to-json": "^3.3.4",
     "eslint-loader": "^2.1.1",
     "express": "^4.16.4",
+    "http-server": "^0.11.1",
     "json-server": "^0.14.0",
     "jsonwebtoken": "^8.3.0",
     "multer": "^1.4.1",
@@ -54,7 +55,7 @@
     "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "local": "./node_modules/concurrently/bin/concurrently.js 'yarn fake-api' 'yarn go'",
-    "start": "./node_modules/concurrently/bin/concurrently.js 'npm run fake-api' 'serve -s build' ",
+    "start": "./node_modules/concurrently/bin/concurrently.js 'npm run fake-api' 'node_modules/http-server/bin/http-server ./build/' ",
     "heroku-postbuild": "npm run build",
     "check-all": "CI=true yarn test && yarn build"
   },
