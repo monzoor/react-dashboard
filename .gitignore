@@ -9,8 +9,7 @@
 
 # production
 /dashboard/build
-/fake-api/public/uploads
-#/server/public/uploads
+/server/public/uploads
 
 # misc
 .DS_Store
