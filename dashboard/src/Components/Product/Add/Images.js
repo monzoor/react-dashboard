@@ -21,13 +21,13 @@ const beforeUpload = (file) => {
 
 class ImageUpload extends PureComponent {
     state = {
-        fileList: [{
-            uid: '1544795020972_1kc1kesjjpo32iss',
-            name: 'xxx.png',
-            status: 200,
-            url: 'api/img/uploads/demo.jpg',
-        }],
-        // fileList: [],
+        // fileList: [{
+        //     uid: '1544795020972_1kc1kesjjpo32iss',
+        //     name: 'xxx.png',
+        //     status: 200,
+        //     url: 'api/img/demo.jpg',
+        // }],
+        fileList: [],
         previewVisible: false,
         previewImage: '',
         initBigUploader: true,
@@ -113,7 +113,7 @@ class ImageUpload extends PureComponent {
         } = this.state;
 
         const props = {
-            action: '//api/upload',
+            action: '/api/upload',
             headers: {
                 authorization: localStorage.token,
             },

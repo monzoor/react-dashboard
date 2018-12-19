@@ -153,7 +153,7 @@ if (!isDev && cluster.isMaster) {
                     uid: data.filename.replace('.jpg', ''),
                     name: data.originalname,
                     status: 200,
-                    url: `${process.env.REACT_APP_API_URL}/uploads/${data.filename}`,
+                    url: `/api/img/${data.filename}`,
                 }));
                 res.status(status).json(uploadedData[0]);
             }
@@ -181,37 +181,12 @@ if (!isDev && cluster.isMaster) {
         }
     });
 
-    server.get('*', function(request, response) {
+    server.get('*', (request, response) => {
         response.sendFile(path.resolve(__dirname, '../dashboard/build', 'index.html'));
     });
-    // server.use(router);
     server.use('/api', router);
 
-    // const potNumber = 5555;
-    // server.listen(potNumber, () => {
-    //     console.log(`Run Auth API Server at port: http://localhost:${potNumber}`);
-    // });
-    server.listen(PORT, function () {
+    server.listen(PORT, () => {
         console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
     });
-
-//   const app = express();
-
-//   // Priority serve any static files.
-//   app.use(express.static(path.resolve(__dirname, '../build')));
-
-//   // Answer API requests.
-//   app.get('/api', function (req, res) {
-//     res.set('Content-Type', 'application/json');
-//     res.send('{"message":"Hello from the custom server!"}');
-//   });
-
-//   // All remaining requests return the React app, so it can handle routing.
-//   app.get('*', function(request, response) {
-//     response.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-//   });
-
-//   app.listen(PORT, function () {
-//     console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
-//   });
 }
