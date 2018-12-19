@@ -10,7 +10,8 @@
         "dev": "node_modules/concurrently/bin/concurrently.js 'yarn start' 'yarn ui'",
         "start": "node server",
         "heroku-postbuild": "cd dashboard/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-        "check-all": "cd dashboard/ && CI=true yarn test && yarn build"
+        "check-all": "cd dashboard/ && CI=true yarn test && yarn build",
+        "locals": "yarn && cd dashboard/ && yarn"
     },
     "pre-commit": [
       "check-all"
