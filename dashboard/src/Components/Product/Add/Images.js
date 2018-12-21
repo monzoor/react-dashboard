@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import {
     Upload,
     Icon,
@@ -6,6 +7,7 @@ import {
     message,
 } from 'antd';
 import config from './_config';
+import { imgaeUpload } from '../../../Actions/addProductDetailsActions';
 
 const beforeUpload = (file) => {
     const isJPG = file.type === 'image/jpeg';
@@ -39,8 +41,8 @@ class ImageUpload extends PureComponent {
 
     updateImageDataList = (imageList) => {
         const dataToSave = imageList.map(datas => datas.response);
-        const { onUpdate } = this.props;
-        onUpdate(dataToSave);
+        const { dispatch } = this.props;
+        dispatch(imgaeUpload(dataToSave));
     }
 
     handleChange = (info) => {
@@ -151,5 +153,10 @@ class ImageUpload extends PureComponent {
     }
 }
 
+const mapStateToProps = state => ({
+    errors: state.errors,
+});
 
-export default ImageUpload;
+export default connect(mapStateToProps)(ImageUpload);
+
+// export default ImageUpload;

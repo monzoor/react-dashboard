@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Editable from 'react-x-editable';
+import { addProductDetails } from '../../../Actions/addProductDetailsActions';
 import CategoryDrawer from './CategoryDrawer';
 
 class ProductDetails extends PureComponent {
@@ -10,9 +12,9 @@ class ProductDetails extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { onUpdate } = this.props;
+        const { dispatch } = this.props;
         if (this.state !== prevState) {
-            onUpdate(this.state);
+            dispatch(addProductDetails(this.state));
         }
     }
 
@@ -86,5 +88,9 @@ class ProductDetails extends PureComponent {
     }
 }
 
+const mapStateToProps = state => ({
+    errors: state.errors,
+});
 
-export default ProductDetails;
+export default connect(mapStateToProps)(ProductDetails);
+// export default ProductDetails;
