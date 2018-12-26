@@ -22,6 +22,7 @@ export default function (state = initialState, action) {
             currentSteps: {
                 item: 1,
                 status: 'finish',
+                oka: 'oka',
             },
             images: action.images,
         };
