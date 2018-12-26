@@ -5,19 +5,41 @@ import ImageUpload from './Add/Images';
 import ProductDetails from './Add/Details';
 
 class ProductAdd extends Component {
+    constructor(props) {
+        super(props);
+
+        this.details = React.createRef();
+    }
+
     state = {
         currentSteps: {
             item: 0,
             status: 'wait',
         },
-        // images: '',
-        // details: {
-        //     title: '',
-        //     categories: [],
-        //     description: '',
-        // },
+        // eslint-disable-next-line react/no-unused-state
+        addProductDetails: {},
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.addProductDetails !== state.addProductDetails) {
+            return {
+                addProductDetails: props.addProductDetails,
+            };
+        }
+        return null;
+    }
+
+    // componentDidMount() {
+    //     // console.log(this.refs);
+    //     // this.node.scrollIntoView();
+    //     // const node = ReactDOM.findDOMNode(this.refs.btn);
+    //     // node.classList.toggle('btn-menu-open');
+    // }
+
+    // const { addProductDetails } = this.state;
+    //     if (addProductDetails !== prevState.addProductDetails) {
+    //         this.inputRef.current.classList.remove('d-none');
+    //     }
     // componentDidUpdate(prevProps, prevState) {
     //     const { images, details } = this.state;
     //     if (images !== prevState.images) {
@@ -43,6 +65,7 @@ class ProductAdd extends Component {
 
     render() {
         const { currentSteps } = this.state;
+
         return (
             <div className="row">
                 <div className="col-12 mb-4">
@@ -58,7 +81,7 @@ class ProductAdd extends Component {
                     <div className="clearfix">&nbsp;</div>
                     <ImageUpload />
                 </div>
-                <div className="col-7">
+                <div ref={this.details} className="col-7 d-none">
                     <p className="h3 font-weight-light text-primary float-left mb-3">Product Details</p>
                     <div className="clearfix">&nbsp;</div>
                     <ProductDetails />
@@ -70,6 +93,7 @@ class ProductAdd extends Component {
 
 const mapStateToProps = state => ({
     errors: state.errors,
+    addProductDetails: state.addProductDetails,
 });
 
 export default connect(mapStateToProps)(ProductAdd);

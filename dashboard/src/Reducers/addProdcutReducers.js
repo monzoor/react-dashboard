@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-    // console.log('--sss---', action);
+    // console.log('--sss---', state);
     switch (action.type) {
     case PRODUCT_IMAGES:
         return {
@@ -22,7 +22,6 @@ export default function (state = initialState, action) {
             currentSteps: {
                 item: 1,
                 status: 'finish',
-                oka: 'oka',
             },
             images: action.images,
         };
