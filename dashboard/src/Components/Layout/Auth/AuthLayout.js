@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
+import { FadeInAnimation } from '../../../Utils/DesignUtils';
 import landingImage from '../../../assets/images/bg-auth-left.jpg';
 import landingImage2 from '../../../assets/images/bg-auth-right.jpg';
 
@@ -15,17 +15,7 @@ class AuthLayout extends Component {
 
     render() {
         const { children } = this.props;
-        const fadeIn = keyframes`
-                from {
-                    opacity: 0;
-                }
-                to {
-                    opacity: 1;
-                }
-                `;
-        const FadeInAnimation = styled.div`
-                    animation: ${fadeIn} 1s;
-                    `;
+
         return (
             <div className="container-fluid">
                 <div className="row minvh-100">
