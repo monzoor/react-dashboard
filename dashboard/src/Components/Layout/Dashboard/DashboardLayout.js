@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
     Layout,
 } from 'antd';
-import styled, { keyframes } from 'styled-components';
+import { FadeInAnimation } from '../../../Utils/DesignUtils';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
@@ -21,17 +21,6 @@ class DashboardLayout extends Component {
     render() {
         const { children, users } = this.props;
 
-        const fadeIn = keyframes`
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-        `;
-        const FadeInAnimation = styled.div`
-            animation: ${fadeIn} 1s;
-            `;
         return (
             <Layout className="minvh-100">
                 <Sidebar />
