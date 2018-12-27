@@ -40,15 +40,16 @@ class ProductAdd extends Component {
     //     if (addProductDetails !== prevState.addProductDetails) {
     //         this.inputRef.current.classList.remove('d-none');
     //     }
+
     componentDidUpdate(prevProps, prevState) {
         const { addProductDetails } = this.state;
         const { images } = addProductDetails;
         if (images !== prevState.images) {
             if (images.length === 0) {
-                this.details.current.classList.add('d-none');
+                this.details.current.classList.remove('op-1');
                 return;
             }
-            this.details.current.classList.remove('d-none');
+            this.details.current.classList.add('op-1');
         }
     //     if (details !== prevState.details) {
     //         const totalLenth = Object.keys(details).length;
@@ -81,7 +82,7 @@ class ProductAdd extends Component {
                     <div className="clearfix">&nbsp;</div>
                     <ImageUpload />
                 </div>
-                <div ref={this.details} className="col-7 d-none">
+                <div ref={this.details} className="col-7 op-0">
                     <p className="h3 font-weight-light text-primary float-left mb-3">Product Details</p>
                     <div className="clearfix">&nbsp;</div>
                     <ProductDetails />
