@@ -6,13 +6,14 @@ import {
 // import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
 
 
-export const imgaeUpload = images => ((dispatch) => {
+export const imgaeUpload = (images, hasNoImage) => ((dispatch) => {
     dispatch({
         type: CLEAR_ERROR_MESSAGES,
     });
     dispatch({
         type: PRODUCT_IMAGES,
         images,
+        hasNoImage,
     });
 });
 

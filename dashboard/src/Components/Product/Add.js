@@ -12,12 +12,12 @@ class ProductAdd extends Component {
     }
 
     state = {
-        currentSteps: {
-            item: 0,
-            status: 'wait',
+        addProductDetails: {
+            currentSteps: {
+                item: 0,
+                status: 'wait',
+            },
         },
-        // eslint-disable-next-line react/no-unused-state
-        addProductDetails: {},
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -40,16 +40,16 @@ class ProductAdd extends Component {
     //     if (addProductDetails !== prevState.addProductDetails) {
     //         this.inputRef.current.classList.remove('d-none');
     //     }
-    // componentDidUpdate(prevProps, prevState) {
-    //     const { images, details } = this.state;
-    //     if (images !== prevState.images) {
-    //         this.setState({
-    //             currentSteps: {
-    //                 item: 0,
-    //                 status: 'finish',
-    //             },
-    //         });
-    //     }
+    componentDidUpdate(prevProps, prevState) {
+        const { addProductDetails } = this.state;
+        const { images } = addProductDetails;
+        if (images !== prevState.images) {
+            if (images.length === 0) {
+                this.details.current.classList.add('d-none');
+                return;
+            }
+            this.details.current.classList.remove('d-none');
+        }
     //     if (details !== prevState.details) {
     //         const totalLenth = Object.keys(details).length;
     //         const hasAllValues = !!(Object.keys(details).filter(values => (typeof details[values] === 'undefined') || details[values].length !== 0).length === totalLenth);
@@ -61,11 +61,11 @@ class ProductAdd extends Component {
     //             },
     //         });
     //     }
-    // }
+    }
 
     render() {
-        const { currentSteps } = this.state;
-
+        const { addProductDetails } = this.state;
+        const { currentSteps } = addProductDetails;
         return (
             <div className="row">
                 <div className="col-12 mb-4">

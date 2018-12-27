@@ -41,7 +41,7 @@ if (!isDev && cluster.isMaster) {
 
 
     const SECRET_KEY = '123456789';
-    const expiresIn = '1h';
+    const expiresIn = '5h';
 
     // const upload = multer({ dest: 'uploads/' });
 
