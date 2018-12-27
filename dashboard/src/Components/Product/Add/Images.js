@@ -39,10 +39,10 @@ class ImageUpload extends PureComponent {
         this.setState({ previewVisible: false });
     }
 
-    updateImageDataList = (imageList) => {
+    updateImageDataList = (imageList, type) => {
         const dataToSave = imageList.map(datas => datas.response);
         const { dispatch } = this.props;
-        dispatch(imgaeUpload(dataToSave));
+        dispatch(imgaeUpload(dataToSave, type));
     }
 
     handleChange = (info) => {
@@ -59,7 +59,8 @@ class ImageUpload extends PureComponent {
             }
         }
         if (info.file.status === 'removed') {
-            this.updateImageDataList(info.fileList);
+            const hasNoImage = (info.fileList.length === 0);
+            this.updateImageDataList(info.fileList, hasNoImage);
             message.warning('File deleted successfully');
         }
         if (info.file.status === 'done') {

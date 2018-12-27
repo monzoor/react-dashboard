@@ -3,7 +3,7 @@ import { PRODUCT_IMAGES, PRODUCT_DETAILS } from './types';
 const initialState = {
     currentSteps: {
         item: 0,
-        status: 'wait',
+        status: 'process',
     },
     images: [],
     details: {
@@ -16,15 +16,17 @@ const initialState = {
 export default function (state = initialState, action) {
     // console.log('--sss---', state);
     switch (action.type) {
-    case PRODUCT_IMAGES:
+    case PRODUCT_IMAGES: {
+        const { images, hasNoImage } = action;
         return {
             ...state,
             currentSteps: {
-                item: 1,
-                status: 'finish',
+                item: (!hasNoImage) ? 1 : 0,
+                status: 'process',
             },
-            images: action.images,
+            images,
         };
+    }
 
     case PRODUCT_DETAILS:
         return {
