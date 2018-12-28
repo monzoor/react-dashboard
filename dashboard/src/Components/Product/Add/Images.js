@@ -7,7 +7,7 @@ import {
     message,
 } from 'antd';
 import config from './_config';
-import { imgaeUpload } from '../../../Actions/addProductDetailsActions';
+import { imgaeUpload } from '../_Actions/addProductDetailsActions';
 
 const beforeUpload = (file) => {
     const isJPG = file.type === 'image/jpeg';

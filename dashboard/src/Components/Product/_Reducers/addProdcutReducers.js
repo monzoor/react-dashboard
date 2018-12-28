@@ -1,4 +1,4 @@
-import { PRODUCT_IMAGES, PRODUCT_DETAILS } from './types';
+import { PRODUCT_IMAGES, PRODUCT_DETAILS } from '../_constant';
 
 const initialState = {
     currentSteps: {
