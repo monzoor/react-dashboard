@@ -1,9 +1,9 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { setAuthTokenToHeader, verifyToken } from '../Utils/setAuthToken';
+import { setAuthTokenToHeader, verifyToken } from '../../../Utils/setAuthToken';
 
-import { SET_USER, CLEAR_ERROR_MESSAGES } from './_constant';
-import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
+import { SET_USER, CLEAR_ERROR_MESSAGES } from '../_constant';
+import ErrorDispatch from '../../../ErrorBoundary/ErrorDispatchType';
 
 
 export function auth(props, data) {

@@ -1,4 +1,4 @@
-import { SET_USER } from './types';
+import { SET_USER } from '../_constant';
 
 const initialState = {
     isAuthenticated: false,

@@ -10,7 +10,7 @@ import {
 
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
-import { signup } from '../../Actions/authAction';
+import { signup } from './_Actions/authAction';
 import { Email, Password, Name } from './_FormComponent';
 
 export class Signup extends Component {
