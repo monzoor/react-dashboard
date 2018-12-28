@@ -14,7 +14,7 @@
         "locals": "yarn && cd dashboard/ && yarn"
     },
     "pre-commit": [
-      "check-all"
+        "check-all"
     ],
     "cacheDirectories": [
         "node_modules",
@@ -29,7 +29,6 @@
         "jsonwebtoken": "^8.3.0",
         "multer": "^1.4.1",
         "password-hash": "^1.2.2",
-        "pre-commit": "^1.2.2",
         "uniqid": "^5.0.3"
     },
     "author": "Monzoor Morshed Mahmud",
@@ -44,5 +43,7 @@
         "react"
     ],
     "license": "MIT",
-    "devDependencies": {}
+    "devDependencies": {
+        "pre-commit": "^1.2.2"
+    }
 }
