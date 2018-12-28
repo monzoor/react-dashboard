@@ -1,15 +1,15 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
-export function setAuthTokenToHeader(token) {
+const setAuthTokenToHeader = (token) => {
     if (token) {
         axios.defaults.headers.common.authorization = `Bearer ${token}`;
         return;
     }
     delete axios.defaults.headers.common.authorization;
-}
+};
 
-export function verifyToken(token) {
+const verifyToken = (token) => {
     // console.log('has auth?');
     const users = jwt.decode(token);
     const currentTime = Date.now() / 1000;
@@ -19,4 +19,9 @@ export function verifyToken(token) {
     localStorage.removeItem('token');
     return false;
     // return !!(localStorage.token);
-}
+};
+
+export {
+    setAuthTokenToHeader,
+    verifyToken,
+};

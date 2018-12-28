@@ -13,6 +13,10 @@ const {
     Header,
 } = Layout;
 
+const logout = () => {
+    localStorage.clear();
+    window.location.href = '/login';
+};
 const ProfileMenu = (
     <Menu>
         <Menu.Item>
@@ -22,10 +26,10 @@ const ProfileMenu = (
             </Link>
         </Menu.Item>
         <Menu.Item>
-            <Link to="/logout">
+            <button className="btn bg-transparent p-0 btn-sm" type="button" onClick={logout}>
                 <Icon className="mr-3" type="poweroff" />
                 Logout
-            </Link>
+            </button>
         </Menu.Item>
     </Menu>
 );
