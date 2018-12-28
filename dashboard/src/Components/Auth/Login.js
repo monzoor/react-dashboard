@@ -10,7 +10,7 @@ import {
 
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import ErrorThrower from '../../ErrorBoundary/ErrorThrower';
-import { auth } from '../../Actions/authAction';
+import { auth } from './_Actions/authAction';
 import { Email, Password, RememberMe } from './_FormComponent';
 
 export class Login extends Component {
