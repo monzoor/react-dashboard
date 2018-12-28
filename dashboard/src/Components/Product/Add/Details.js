@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Editable from 'react-x-editable';
-import { addProductDetails } from '../../../Actions/addProductDetailsActions';
+import { addProductDetails } from '../_Actions/addProductDetailsActions';
 import CategoryDrawer from './CategoryDrawer';
 
 class ProductDetails extends PureComponent {

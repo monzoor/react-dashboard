@@ -2,7 +2,7 @@ import {
     PRODUCT_IMAGES,
     PRODUCT_DETAILS,
     CLEAR_ERROR_MESSAGES,
-} from './_constant';
+} from '../_constant';
 // import ErrorDispatch from '../ErrorBoundary/ErrorDispatchType';
 
 
